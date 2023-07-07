@@ -1,8 +1,11 @@
+import * as React from 'react';
+import {SignIn} from "./SignIn";
+
 export default function Page() {
     return (
-      <>
-        <h1>Sign In</h1>
-      </>
+      <React.Fragment>
+       <SignIn/>
+      </React.Fragment>
     );
   }
   
