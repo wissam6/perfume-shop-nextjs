@@ -1,5 +1,5 @@
 "use client";
-import "@progress/kendo-theme-fluent/dist/all.css";
+/* import "@progress/kendo-theme-fluent/dist/all.css"; */
 
 import * as React from "react";
 import {
@@ -11,10 +11,53 @@ import {
 } from "@progress/kendo-react-form";
 import { Error } from "@progress/kendo-react-labels";
 import { Input } from "@progress/kendo-react-inputs";
+import { db } from "../../firebase";
+import { collection, addDoc, getDocs } from "firebase/firestore";
+import { useRouter } from "next/navigation";
+const bcrypt = require("bcryptjs");
 
 export const SignUp = () => {
-  const handleSubmit = (dataItem: { [name: string]: any }) =>
-    alert(JSON.stringify(dataItem, null, 2));
+  const router = useRouter();
+  const handleSubmit = ({ email, username, password, confirmpassword }) => {
+    submit(email, username, password, confirmpassword);
+  };
+
+  const submit = async (
+    email: string,
+    userName: string,
+    password: string,
+    confirmpassword: string
+  ) => {
+    const querySnapshot = await getDocs(collection(db, "users"));
+    let emailExists: boolean,
+      userNameExists: boolean = false;
+    querySnapshot.forEach((doc) => {
+      if (doc.data().email === email) {
+        emailExists = true;
+      }
+      if (doc.data().userName === userName) {
+        userNameExists = true;
+      }
+    });
+
+    if (!emailExists && !userNameExists) {
+      try {
+        const docRef = await addDoc(collection(db, "users"), {
+          userName: userName,
+          email: email,
+          password: await bcrypt.hash(password, 10),
+        });
+        router.push("/authentication/signin");
+        console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
+    } else if (!emailExists && userNameExists) {
+      window.alert("username already exists");
+    } else {
+      window.alert("email already exists");
+    }
+  };
   return (
     <React.Fragment>
       <div
@@ -60,7 +103,7 @@ export const SignUp = () => {
                 </div>
                 <div className="mb-3">
                   <Field
-                    name={"confirm-password"}
+                    name={"confirmpassword"}
                     component={Input}
                     label={"confirm password"}
                     type="password"

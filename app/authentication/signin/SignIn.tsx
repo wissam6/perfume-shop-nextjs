@@ -1,6 +1,6 @@
 "use client";
-import "@progress/kendo-theme-fluent/dist/all.css";
-
+/* import "@progress/kendo-theme-fluent/dist/all.css"; */
+import { useRouter } from "next/navigation";
 import * as React from "react";
 import {
   Form,
@@ -12,9 +12,45 @@ import {
 import { Error } from "@progress/kendo-react-labels";
 import { Input } from "@progress/kendo-react-inputs";
 
+import { db } from "../../firebase";
+import { collection, getDocs } from "firebase/firestore";
+const bcrypt = require("bcryptjs");
+
 export const SignIn = () => {
-  const handleSubmit = (dataItem: { [name: string]: any }) =>
-    alert(JSON.stringify(dataItem, null, 2));
+  const router = useRouter();
+  const handleSubmit = ({ email, password }) => {
+    submit(email, password);
+  };
+
+  const submit = async (email: string, password: string) => {
+    const querySnapshot = await getDocs(collection(db, "users"));
+    let emailExists = false;
+
+    querySnapshot.forEach((doc) => {
+      if (doc.data().email === email) {
+        emailExists = true;
+      }
+      bcrypt.compare(
+        password,
+        doc.data().password,
+        function (err: any, res: any) {
+          if (err) {
+            console.log(err);
+          }
+          if (res) {
+            if (emailExists) {
+              router.push("/");
+            } else {
+              window.alert("invalid email");
+            }
+          } else {
+            //window.alert("wrong password");
+          }
+        }
+      );
+    });
+  };
+
   return (
     <React.Fragment>
       <div
@@ -29,7 +65,9 @@ export const SignIn = () => {
           render={(formRenderProps: FormRenderProps) => (
             <FormElement style={{ maxWidth: 650 }}>
               <fieldset className={"k-form-fieldset"}>
-                <h3 style={{ textAlign: "center", fontSize: "26px" }}>Login</h3>
+                <h3 style={{ textAlign: "center", fontSize: "26px" }}>
+                  Welcome
+                </h3>
                 <div className="mb-3">
                   <Field
                     name={"email"}

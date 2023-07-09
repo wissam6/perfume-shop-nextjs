@@ -12,9 +12,12 @@
     "@progress/kendo-react-form": "^5.14.1",
     "@progress/kendo-react-inputs": "^5.14.1",
     "@progress/kendo-react-labels": "^5.14.1",
+    "@progress/kendo-theme-default": "^6.5.0",
     "@progress/kendo-theme-fluent": "^6.5.0",
+    "bcryptjs": "^2.4.3",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.8",
+    "firebase": "^10.0.0",
     "next": "^13.4.8",
     "react": "18.2.0",
     "react-dom": "18.2.0"
