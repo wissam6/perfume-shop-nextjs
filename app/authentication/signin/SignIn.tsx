@@ -5,17 +5,16 @@ import {
   Form,
   Field,
   FormElement,
-  FieldRenderProps,
   FormRenderProps,
 } from "@progress/kendo-react-form";
-import { Error } from "@progress/kendo-react-labels";
 import { Input } from "@progress/kendo-react-inputs";
-
 import { db } from "../../firebase";
 import { collection, getDocs } from "firebase/firestore";
 const bcrypt = require("bcryptjs");
 
 export const SignIn = () => {
+  const [loggedUser, setLoggedUser] = React.useState();
+
   const router = useRouter();
   const handleSubmit = ({ email, password }) => {
     submit(email, password);
@@ -24,6 +23,7 @@ export const SignIn = () => {
   const submit = async (email: string, password: string) => {
     let emailExists = false;
     let hashPassword;
+    let userName;
 
     const querySnapshot = await getDocs(collection(db, "users"));
 
@@ -31,6 +31,7 @@ export const SignIn = () => {
       if (doc.data().email === email) {
         emailExists = true;
         hashPassword = doc.data().password;
+        userName = doc.data().userName;
       }
     });
 
@@ -42,6 +43,7 @@ export const SignIn = () => {
           console.log(err);
         }
         if (res) {
+          setLoggedUser(userName);
           router.push("/");
         } else {
           window.alert("incorrect password");
@@ -49,6 +51,10 @@ export const SignIn = () => {
       });
     }
   };
+
+  React.useEffect(() => {
+    localStorage.setItem("users", JSON.stringify(loggedUser));
+  }, [loggedUser]);
 
   return (
     <React.Fragment>
