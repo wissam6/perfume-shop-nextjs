@@ -1,5 +1,4 @@
 "use client";
-/* import "@progress/kendo-theme-fluent/dist/all.css"; */
 import { useRouter } from "next/navigation";
 import * as React from "react";
 import {
@@ -23,32 +22,32 @@ export const SignIn = () => {
   };
 
   const submit = async (email: string, password: string) => {
-    const querySnapshot = await getDocs(collection(db, "users"));
     let emailExists = false;
+    let hashPassword;
+
+    const querySnapshot = await getDocs(collection(db, "users"));
 
     querySnapshot.forEach((doc) => {
       if (doc.data().email === email) {
         emailExists = true;
+        hashPassword = doc.data().password;
       }
-      bcrypt.compare(
-        password,
-        doc.data().password,
-        function (err: any, res: any) {
-          if (err) {
-            console.log(err);
-          }
-          if (res) {
-            if (emailExists) {
-              router.push("/");
-            } else {
-              window.alert("invalid email");
-            }
-          } else {
-            //window.alert("wrong password");
-          }
-        }
-      );
     });
+
+    if (!emailExists) {
+      window.alert("incorrect email");
+    } else {
+      bcrypt.compare(password, hashPassword, function (err: any, res: any) {
+        if (err) {
+          console.log(err);
+        }
+        if (res) {
+          router.push("/");
+        } else {
+          window.alert("incorrect password");
+        }
+      });
+    }
   };
 
   return (
