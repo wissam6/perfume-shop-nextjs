@@ -1,0 +1,52 @@
+@media only screen and (max-width: 600px) {
+  .homeVideo {
+    margin: 0 auto;
+    height: 50%;
+  }
+  .video {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .homeVideo {
+    margin: 0 auto;
+  }
+  .video {
+    width: 100%;
+    transform: scale(0.7);
+    object-fit: fill;
+    position: relative;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .homeVideo {
+    /*  width: 100%; */
+    margin: 0 auto;
+  }
+  .video {
+    transform: scale(0.8);
+    object-fit: fill;
+    position: relative;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .homeVideo {
+    margin: 0 auto;
+    /* width: 100%; */
+    height: 50%;
+  }
+  .video {
+    transform: scale(1);
+    height: 500px;
+    object-fit: fill;
+    position: relative;
+  }
+}
+
+.title {
+  text-align: center;
+  /*   font-family: Roboto; */
+}
