@@ -9,21 +9,28 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@progress/kendo-react-form": "^5.14.1",
-    "@progress/kendo-react-inputs": "^5.14.1",
-    "@progress/kendo-react-labels": "^5.14.1",
-    "@progress/kendo-theme-default": "^6.5.0",
-    "@progress/kendo-theme-fluent": "^6.5.0",
+    "@progress/kendo-licensing": "^1.3.1",
+    "@progress/kendo-react-animation": "^5.15.0",
+    "@progress/kendo-react-form": "^5.15.0",
+    "@progress/kendo-react-indicators": "^5.15.0",
+    "@progress/kendo-react-inputs": "^5.15.0",
+    "@progress/kendo-react-intl": "^5.15.0",
+    "@progress/kendo-react-labels": "^5.15.0",
+    "@progress/kendo-react-layout": "^5.15.0",
+    "@progress/kendo-react-progressbars": "^5.15.0",
+    "@progress/kendo-svg-icons": "^1.8.0",
+    "@progress/kendo-theme-default": "^6.6.0",
+    "@progress/kendo-theme-fluent": "^6.6.0",
     "bcryptjs": "^2.4.3",
-    "eslint": "8.44.0",
-    "eslint-config-next": "13.4.8",
+    "eslint": "8.45.0",
+    "eslint-config-next": "13.4.10",
     "firebase": "^10.0.0",
-    "next": "^13.4.8",
+    "next": "^13.4.10",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "@types/node": "20.4.0",
-    "@types/react": "18.2.14"
+    "@types/node": "20.4.2",
+    "@types/react": "18.2.15"
   }
 }
