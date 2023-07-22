@@ -6,8 +6,8 @@ export interface ProductCategory {
 }
 
 export interface Product {
-  id: number;
-  ProductID: number;
+  id?: number;
+  ProductID?: number;
   ProductName?: string;
   SupplierID?: number;
   CategoryID?: number;

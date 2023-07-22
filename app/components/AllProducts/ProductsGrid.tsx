@@ -8,12 +8,14 @@ import {
   GridItemChangeEvent,
   GridToolbar,
 } from "@progress/kendo-react-grid";
-
+import { ExcelExport } from "@progress/kendo-react-excel-export";
+import { Button } from "@progress/kendo-react-buttons";
 import { MyCommandCell } from "./MyCommandCell";
 import { insertItem, updateItem, deleteItem } from "./services";
 import { Product } from "./interfaces";
 import { db } from "../../firebase";
 import { collection, getDocs } from "firebase/firestore";
+import { process } from "@progress/kendo-data-query";
 import Image from "next/image";
 
 const editField: string = "inEdit";
@@ -45,6 +47,7 @@ export const AllProducts = () => {
   };
 
   const add = (dataItem: Product) => {
+    console.log("add 2");
     dataItem.inEdit = true;
 
     const newData = insertItem(dataItem);
@@ -92,6 +95,7 @@ export const AllProducts = () => {
   };
 
   const addNew = () => {
+    console.log("add 1");
     const newDataItem = { inEdit: true, Discontinued: false };
 
     setData([newDataItem, ...data]);
@@ -114,7 +118,10 @@ export const AllProducts = () => {
     return (
       <td>
         <Image
-          src={props.dataItem.image}
+          src={
+            props.dataItem.image ||
+            "https://static.wikia.nocookie.net/familyguy/images/a/aa/FamilyGuy_Single_PeterDrink_R7.jpg/revision/latest?cb=20200526171842"
+          }
           alt="Eau de Cologne"
           width={100}
           height={100}
@@ -123,33 +130,62 @@ export const AllProducts = () => {
     );
   };
 
+  const _export = React.useRef<ExcelExport | null>(null);
+  const excelExport = () => {
+    if (_export.current !== null) {
+      _export.current.save();
+    }
+  };
+
+  const [sort, setSort] = React.useState();
+  const handleSortChange = (event) => {
+    setSort(event.sort);
+  };
+
   return (
-    <Grid
-      style={{ height: "420px" }}
-      data={data}
-      onItemChange={itemChange}
-      editField={editField}
-    >
-      <GridToolbar>
-        <button
-          title="Add new"
-          className="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary"
-          onClick={addNew}
+    <ExcelExport data={data} ref={_export}>
+      <div style={{ height: "100%" }}>
+        <Grid
+          style={{ height: "100%" }}
+          data={process(data, { sort: sort })}
+          onItemChange={itemChange}
+          editField={editField}
+          sort={sort}
+          sortable={true}
+          onSortChange={handleSortChange}
         >
-          Add new
-        </button>
-      </GridToolbar>
-      <Column field="image" title=" " cell={ImageCell} width={100} />
-      <Column field="brand" title="Brand" />
-      <Column field="type" title="Type" />
-      <Column field="stock" title="Stock" />
-      <Column field="country" title="Country" />
-      <Column field="size" title="Size" />
-      <Column field="sex" title="Sex" />
-      <Column field="rating" title="Rating" />
-      <Column field="sale" title="Sale" />
-      <Column field="price" title="Price" />
-      <Column cell={CommandCell} width="200px" />
-    </Grid>
+          <GridToolbar>
+            <Button title="Add new" themeColor="primary" onClick={addNew}>
+              Add new
+            </Button>
+            <Button
+              title="Export Excel"
+              themeColor="primary"
+              onClick={excelExport}
+            >
+              Export to Excel
+            </Button>
+          </GridToolbar>
+          <Column
+            field="image"
+            title=" "
+            cells={{ data: ImageCell }}
+            width={100}
+            editor="text"
+          />
+          <Column field="brand" title="Brand" editor="text" />
+          <Column field="name" title="Name" editor="text" />
+          <Column field="type" title="Type" editor="text" />
+          <Column field="stock" title="Stock" editor="numeric" />
+          <Column field="country" title="Country" editor="text" />
+          <Column field="size" title="Size" editor="numeric" />
+          <Column field="sex" title="Sex" editor="text" />
+          <Column field="rating" title="Rating" editor="numeric" />
+          <Column field="sale" title="Sale" editor="numeric" />
+          <Column field="price" title="Price" editor="numeric" />
+          <Column cell={CommandCell} width="200px" />
+        </Grid>
+      </div>
+    </ExcelExport>
   );
 };

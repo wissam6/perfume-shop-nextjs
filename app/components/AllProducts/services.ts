@@ -1,5 +1,11 @@
 import { db } from "../../firebase";
-import { collection, getDocs } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 let data = [];
 
 const fetchData = async () => {
@@ -13,6 +19,32 @@ const fetchData = async () => {
   data = products;
 };
 
+const insertToDatabase = async (item) => {
+  try {
+    const docRef = await addDoc(collection(db, "perfumes"), {
+      id: item.id,
+      brand: item.brand || "",
+      country: item.country || "",
+      image: item.image || "",
+      name: item.name || "",
+      price: item.price || 0,
+      rating: item.rating || 0,
+      sale: item.sale || 0,
+      sex: item.sex || "",
+      size: item.size || 0,
+      stock: item.stock || 1,
+      type: item.type || "",
+    });
+    console.log("Document written with ID: ", docRef.id);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+};
+
+const deleteFromDataBase = async () => {
+  await deleteDoc(doc(db, "perfumes", "0"));
+};
+
 fetchData();
 
 const generateId = (data) =>
@@ -22,6 +54,7 @@ export const insertItem = (item) => {
   item.id = generateId(data);
   item.inEdit = false;
   data.unshift(item);
+  insertToDatabase(item);
   return data;
 };
 

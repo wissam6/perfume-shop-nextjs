@@ -17,6 +17,7 @@
     "@progress/kendo-react-data-tools": "^5.15.0",
     "@progress/kendo-react-dateinputs": "^5.15.0",
     "@progress/kendo-react-dropdowns": "^5.15.0",
+    "@progress/kendo-react-excel-export": "^5.15.0",
     "@progress/kendo-react-form": "^5.15.0",
     "@progress/kendo-react-grid": "^5.15.0",
     "@progress/kendo-react-indicators": "^5.15.0",
