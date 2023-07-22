@@ -6,12 +6,8 @@ import { Categories } from "../components/Header/Categories";
 import styles from "./home.module.css";
 
 export const Home = () => {
-  fetch("https://dummyjson.com/products/category/fragrances")
-    .then((res) => res.json())
-    .then(console.log);
-
   return (
-    <React.Fragment>
+    <div>
       <Header />
       <div className={styles.homeVideo}>
         <video
@@ -32,6 +28,9 @@ export const Home = () => {
         <h3 className={styles.title}>Categories</h3>
         <Categories />
       </div>
-    </React.Fragment>
+      <div className="onsale">
+        <h3 className={styles.title}>On Sale</h3>
+      </div>
+    </div>
   );
 };

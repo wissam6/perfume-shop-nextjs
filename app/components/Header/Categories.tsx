@@ -65,7 +65,7 @@ export const Categories = () => {
             />
           </div>
           <div className="pane-content">
-            <h3>Eau De Toilette</h3>
+            <h3>Eau De Parfum</h3>
             <Image
               src={images[2]}
               alt="Eau de Parfum"
@@ -77,11 +77,11 @@ export const Categories = () => {
         {/*   </Push> */}
         <Splitter panes={panes2}>
           <div className="pane-content">
-            <h3>Eau De Toilette</h3>
-            <Image src={images[3]} alt="d" width={300} height={300} />
+            <h3>Eau Fraiche</h3>
+            <Image src={images[3]} alt="Eau Fraiche" width={300} height={300} />
           </div>
           <div className="pane-content">
-            <h3>Eau De Toilette</h3>
+            <h3>Fruity</h3>
             <Image src={images[4]} alt="Fruity" width={300} height={300} />
           </div>
         </Splitter>

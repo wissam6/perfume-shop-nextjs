@@ -11,6 +11,8 @@ export default function Page() {
       <Link href="/authentication/signin">Sign In</Link>
       <br/>
       <Link href="/authentication/signup">Sign Up</Link>
+      <br/>
+      <Link href="/allproducts">All Products</Link>
     </React.Fragment>
   );
 }
