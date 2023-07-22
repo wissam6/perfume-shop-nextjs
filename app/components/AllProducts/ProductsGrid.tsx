@@ -7,6 +7,7 @@ import {
   GridColumn as Column,
   GridItemChangeEvent,
   GridToolbar,
+  GridDataStateChangeEvent,
 } from "@progress/kendo-react-grid";
 import { ExcelExport } from "@progress/kendo-react-excel-export";
 import { Button } from "@progress/kendo-react-buttons";
@@ -15,7 +16,7 @@ import { insertItem, updateItem, deleteItem } from "./services";
 import { Product } from "./interfaces";
 import { db } from "../../firebase";
 import { collection, getDocs } from "firebase/firestore";
-import { process } from "@progress/kendo-data-query";
+import { DataResult, process, State } from "@progress/kendo-data-query";
 import Image from "next/image";
 
 const editField: string = "inEdit";
@@ -23,7 +24,7 @@ const editField: string = "inEdit";
 export const AllProducts = () => {
   const [initialData, setInitialData] = React.useState<Product[]>([]);
   const [data, setData] = React.useState<Product[]>([]);
-
+  const [dataState, setDataState] = React.useState<State>({});
   const fetchData = async () => {
     let products: any = [];
     const querySnapshot = await getDocs(collection(db, "perfumes"));
@@ -34,7 +35,10 @@ export const AllProducts = () => {
     });
     setInitialData(products);
     setData(products);
+    setDataResult(process(products, dataState));
   };
+
+  const [dataResult, setDataResult] = React.useState<DataResult>();
 
   React.useEffect(() => {
     fetchData();
@@ -43,28 +47,26 @@ export const AllProducts = () => {
   // modify the data in the store, db etc
   const remove = (dataItem: Product) => {
     const newData = [...deleteItem(dataItem)];
-    setData(newData);
+    setDataResult(process(newData, dataState));
   };
 
   const add = (dataItem: Product) => {
-    console.log("add 2");
     dataItem.inEdit = true;
-
     const newData = insertItem(dataItem);
-    setData(newData);
+    setDataResult(process(newData, dataState));
   };
 
   const update = (dataItem: Product) => {
     dataItem.inEdit = false;
     const newData = updateItem(dataItem);
-    setData(newData);
+    setDataResult(process(newData, dataState));
   };
 
   // Local state operations
   const discard = () => {
     const newData = [...data];
     newData.splice(0, 1);
-    setData(newData);
+    setDataResult(process(newData, dataState));
   };
 
   const cancel = (dataItem: Product) => {
@@ -73,33 +75,42 @@ export const AllProducts = () => {
       item.id === originalItem.id ? originalItem : item
     );
 
-    setData(newData);
+    setDataResult(process(newData, dataState));
   };
 
   const enterEdit = (dataItem: Product) => {
-    setData(
-      data.map((item) =>
-        item.id === dataItem.id ? { ...item, inEdit: true } : item
+    setDataResult(
+      process(
+        dataResult.data.map((item) =>
+          item.id === dataItem.id ? { ...item, inEdit: true } : item
+        ),
+        dataState
       )
     );
   };
 
   const itemChange = (event: GridItemChangeEvent) => {
-    const newData = data.map((item) =>
+    const newData = dataResult.data.map((item) =>
       item.id === event.dataItem.id
         ? { ...item, [event.field || ""]: event.value }
         : item
     );
 
-    setData(newData);
+    setDataResult(process(newData, dataState));
   };
 
   const addNew = () => {
-    console.log("add 1");
     const newDataItem = { inEdit: true, Discontinued: false };
-
-    setData([newDataItem, ...data]);
+    setDataResult(process([newDataItem, ...data], dataState));
   };
+
+  const loadingPanel = (
+    <div className="k-loading-mask">
+      <span className="k-loading-text">Loading</span>
+      <div className="k-loading-image"></div>
+      <div className="k-loading-color"></div>
+    </div>
+  );
 
   const CommandCell = (props: GridCellProps) => (
     <MyCommandCell
@@ -137,22 +148,27 @@ export const AllProducts = () => {
     }
   };
 
-  const [sort, setSort] = React.useState();
-  const handleSortChange = (event) => {
-    setSort(event.sort);
+  const dataStateChange = (event: GridDataStateChangeEvent) => {
+    setDataResult(process(data, event.dataState));
+    setDataState(event.dataState);
   };
 
   return (
     <ExcelExport data={data} ref={_export}>
       <div style={{ height: "100%" }}>
+        {data.length === 0 && loadingPanel}
         <Grid
-          style={{ height: "100%" }}
-          data={process(data, { sort: sort })}
+          style={{ height: data.length !== 0 ? "100%" : "700px" }}
           onItemChange={itemChange}
           editField={editField}
-          sort={sort}
           sortable={true}
-          onSortChange={handleSortChange}
+          filterable={true}
+          groupable={true}
+          reorderable={true}
+          pageable={{ buttonCount: 4, pageSizes: true }}
+          data={dataResult}
+          {...dataState}
+          onDataStateChange={dataStateChange}
         >
           <GridToolbar>
             <Button title="Add new" themeColor="primary" onClick={addNew}>
@@ -172,6 +188,7 @@ export const AllProducts = () => {
             cells={{ data: ImageCell }}
             width={100}
             editor="text"
+            filterable={false}
           />
           <Column field="brand" title="Brand" editor="text" />
           <Column field="name" title="Name" editor="text" />
@@ -183,7 +200,7 @@ export const AllProducts = () => {
           <Column field="rating" title="Rating" editor="numeric" />
           <Column field="sale" title="Sale" editor="numeric" />
           <Column field="price" title="Price" editor="numeric" />
-          <Column cell={CommandCell} width="200px" />
+          <Column cell={CommandCell} width="200px" filterable={false} />
         </Grid>
       </div>
     </ExcelExport>

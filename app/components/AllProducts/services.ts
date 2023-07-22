@@ -41,9 +41,9 @@ const insertToDatabase = async (item) => {
   }
 };
 
-const deleteFromDataBase = async () => {
+/* const deleteFromDataBase = async () => {
   await deleteDoc(doc(db, "perfumes", "0"));
-};
+}; */
 
 fetchData();
 
