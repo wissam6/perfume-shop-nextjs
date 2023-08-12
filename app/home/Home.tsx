@@ -50,8 +50,9 @@ export const Home = () => {
           We offer a wide collection of the most popular and most used perfumes
           of the best brands. We are partners with Dior, Chanel, Calven Klein,
           and 73 other top brands. Just below you can see our latest perfume
-          addition which are Dioriviera, My Way Parfum Eau de Parfum, Victoria's
-          Secret Bare Rose Eau de Parfum, and Aqua Media Cologne Forte.
+          addition which are Dioriviera, My Way Parfum Eau de Parfum,
+          Victoria&apos;s Secret Bare Rose Eau de Parfum, and Aqua Media Cologne
+          Forte.
         </p>
         <div className="float-container">
           <div className="float-child">
