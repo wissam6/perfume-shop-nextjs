@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import {
   Avatar,
@@ -18,7 +20,7 @@ export const Header = () => {
   };
   return (
     <React.Fragment>
-      <AppBar>
+      <AppBar positionMode="sticky">
         <AppBarSection className="title">
           <h1 className="title">Golden Perfume</h1>
         </AppBarSection>
@@ -94,9 +96,7 @@ export const Header = () => {
         </AppBarSection>
       </AppBar>
       <style>{`
-            body {
-                background: #dfdfdf;
-            }
+            
             .title {
                 font-size: 18px;
                 margin: 0;

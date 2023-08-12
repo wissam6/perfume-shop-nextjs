@@ -1,7 +1,11 @@
+import { Header } from "../components/Home/Header";
+
 export default function Layout({ children }) {
     return (
       <html lang="en">
-        <body>{children}</body>
+        <body>
+        <Header />
+          {children}</body>
       </html>
     )
   }

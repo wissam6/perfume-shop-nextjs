@@ -40,15 +40,21 @@ export const Categories = () => {
   return (
     <div>
       <Splitter
-        style={{ height: 750 }}
+        style={{
+          height: 750,
+        }}
         panes={nestedPanes}
         orientation={"vertical"}
       >
         {/*   <Push> */}
         <Splitter panes={panes}>
           <div className="pane-content">
-            <h3>Eau De Cologne</h3>
+            <h3>Chanel</h3>
             <Image
+              /* style={{
+                mixBlendMode: "multiply",
+              }} */
+              className="topBrandsImage"
               src={images[0]}
               alt="Eau de Cologne"
               width={300}
@@ -56,8 +62,9 @@ export const Categories = () => {
             />
           </div>
           <div className="pane-content">
-            <h3>Eau De Toilette</h3>
+            <h3>Calvin Klein</h3>
             <Image
+              className="topBrandsImage"
               src={images[1]}
               alt="Eau de Toilette"
               width={300}
@@ -65,8 +72,9 @@ export const Categories = () => {
             />
           </div>
           <div className="pane-content">
-            <h3>Eau De Parfum</h3>
+            <h3>Dior</h3>
             <Image
+              className="topBrandsImage"
               src={images[2]}
               alt="Eau de Parfum"
               width={300}
@@ -77,12 +85,24 @@ export const Categories = () => {
         {/*   </Push> */}
         <Splitter panes={panes2}>
           <div className="pane-content">
-            <h3>Eau Fraiche</h3>
-            <Image src={images[3]} alt="Eau Fraiche" width={300} height={300} />
+            <h3>Tom Ford</h3>
+            <Image
+              className="topBrandsImage"
+              src={images[3]}
+              alt="Eau Fraiche"
+              width={300}
+              height={300}
+            />
           </div>
           <div className="pane-content">
-            <h3>Fruity</h3>
-            <Image src={images[4]} alt="Fruity" width={300} height={300} />
+            <h3>Gucci</h3>
+            <Image
+              className="topBrandsImage"
+              src={images[4]}
+              alt="Fruity"
+              width={300}
+              height={300}
+            />
           </div>
         </Splitter>
       </Splitter>
@@ -97,7 +117,16 @@ export const Categories = () => {
           width: 50%;
         }
         .pane-content:hover {
-          transform: scale(1.1);
+          /* transform: scale(1.1); */
+        }
+        /* .k-pane {
+         background-color: #45B8AC;
+        } */
+        .k-splitbar {
+          background-color: white;
+        }
+        .topBrandsImage:hover {
+          transform: scale(1.1); 
         }
         `}
       </style>

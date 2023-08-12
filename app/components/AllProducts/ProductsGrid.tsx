@@ -158,6 +158,7 @@ export const AllProducts = () => {
       <div style={{ height: "100%" }}>
         {data.length === 0 && loadingPanel}
         <Grid
+          id="allproducts"
           style={{ height: data.length !== 0 ? "100%" : "700px" }}
           onItemChange={itemChange}
           editField={editField}
