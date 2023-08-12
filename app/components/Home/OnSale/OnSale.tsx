@@ -64,7 +64,7 @@ export const OnSale = () => {
                   >
                     <div>
                       <span>
-                        Previous Price: <strike>${item.price}</strike>
+                        Previous Price: <del>${item.price}</del>
                       </span>
                     </div>
                     <div>New Price: {newPrice}</div>
