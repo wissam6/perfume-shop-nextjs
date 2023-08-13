@@ -5,11 +5,6 @@ import { useSearchParams } from "next/navigation";
 
 const product = "versace";
 
-export const ProductPage = (props) => {
-  /* const searchParams = useSearchParams();
-  const search = searchParams.get("search");
-  console.log(search); */
+export const ProductPage = () => {
   return <ProductsCategory product={product} />;
 };
-
-export default ProductPage;
