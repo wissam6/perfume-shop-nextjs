@@ -57,6 +57,11 @@ export const Categories = () => {
               className="topBrandsImage"
               src={images[0]}
               alt="Eau de Cologne"
+              sizes="100vw"
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
               width={300}
               height={300}
             />
@@ -67,6 +72,10 @@ export const Categories = () => {
               className="topBrandsImage"
               src={images[1]}
               alt="Eau de Toilette"
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
               width={300}
               height={300}
             />
@@ -77,6 +86,10 @@ export const Categories = () => {
               className="topBrandsImage"
               src={images[2]}
               alt="Eau de Parfum"
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
               width={300}
               height={300}
             />
@@ -90,6 +103,10 @@ export const Categories = () => {
               className="topBrandsImage"
               src={images[3]}
               alt="Eau Fraiche"
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
               width={300}
               height={300}
             />
@@ -100,6 +117,10 @@ export const Categories = () => {
               className="topBrandsImage"
               src={images[4]}
               alt="Fruity"
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
               width={300}
               height={300}
             />
@@ -119,11 +140,9 @@ export const Categories = () => {
         .pane-content:hover {
           /* transform: scale(1.1); */
         }
-        /* .k-pane {
-         background-color: #45B8AC;
-        } */
-        .k-splitbar {
-          background-color: white;
+        
+        .k-splitter .k-scrollable{
+          overflow-y: hidden;
         }
         .topBrandsImage:hover {
           transform: scale(1.1); 

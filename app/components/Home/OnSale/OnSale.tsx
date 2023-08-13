@@ -5,6 +5,7 @@ import { ScrollView } from "@progress/kendo-react-scrollview";
 import Image from "next/image";
 import { db } from "../../../firebase";
 import { collection, getDocs } from "firebase/firestore";
+import styles from "./onsale.module.css";
 
 export const OnSale = () => {
   const [data, setData] = React.useState([]);
@@ -33,16 +34,18 @@ export const OnSale = () => {
           <Image
             src="https://media4.s-nbcnews.com/i/streams/2014/June/140604/2D274906019762-today-rihanna-perfume-140604-tease.jpg"
             alt="sale"
+            /*  style={{
+              width: "100%",
+              height: "auto",
+            }} */
+            className={styles.scrollview}
             width={700}
             height={385}
           />
         </div>
         <div className="onSale float-child">
           <ScrollView
-            style={{
-              width: "100%",
-              height: 385,
-            }}
+            className={styles.scrollview}
             automaticViewChange={true}
             automaticViewChangeInterval={2000}
           >
@@ -51,12 +54,6 @@ export const OnSale = () => {
               newPrice = item.price - newPrice;
               return (
                 <div key={index}>
-                  <Image
-                    src={item.image}
-                    alt={item.name}
-                    width={700}
-                    height={325}
-                  />
                   <h3
                     style={{
                       paddingLeft: "10px",
@@ -69,6 +66,17 @@ export const OnSale = () => {
                     </div>
                     <div>New Price: {newPrice}</div>
                   </h3>
+                  <Image
+                    src={item.image}
+                    alt={item.name}
+                    /* style={{
+                      width: "100%",
+                      height: "310px",
+                    }} */
+                    className={styles.scrollview}
+                    width={700}
+                    height={325}
+                  />
                 </div>
               );
             })}
