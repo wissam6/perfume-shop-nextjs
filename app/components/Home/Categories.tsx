@@ -1,3 +1,5 @@
+/* "use client"; */
+
 import * as React from "react";
 
 import { Splitter, SplitterOnChangeEvent } from "@progress/kendo-react-layout";
@@ -11,6 +13,9 @@ import {
   Reveal,
 } from "@progress/kendo-react-animation";
 
+import { useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
+
 //import './styles.css';
 const images = [
   "https://static.beautytocare.com/media/catalog/product/a/c/acqua-di-parma-colonia-eau-de-cologne-180ml.jpg",
@@ -21,6 +26,8 @@ const images = [
 ];
 
 export const Categories = () => {
+  const params = useParams();
+  const router = useRouter();
   const [panes, setPanes] = React.useState<Array<any>>([
     { size: "33%", resizable: false },
     {},
@@ -37,6 +44,10 @@ export const Categories = () => {
     { size: "50%", resizable: false },
   ]);
 
+  const handleImageClick = (e) => {
+    router.push(`/productcategory/${e.target.alt}`);
+  };
+
   return (
     <div>
       <Splitter
@@ -50,13 +61,15 @@ export const Categories = () => {
         <Splitter panes={panes}>
           <div className="pane-content">
             <h3>Chanel</h3>
+
             <Image
               /* style={{
                 mixBlendMode: "multiply",
               }} */
+              onClick={handleImageClick}
               className="topBrandsImage"
               src={images[0]}
-              alt="Eau de Cologne"
+              alt="Versace"
               width={300}
               height={300}
             />
@@ -66,7 +79,8 @@ export const Categories = () => {
             <Image
               className="topBrandsImage"
               src={images[1]}
-              alt="Eau de Toilette"
+              onClick={handleImageClick}
+              alt="Dior"
               width={300}
               height={300}
             />
@@ -75,8 +89,9 @@ export const Categories = () => {
             <h3>Dior</h3>
             <Image
               className="topBrandsImage"
+              onClick={handleImageClick}
               src={images[2]}
-              alt="Eau de Parfum"
+              alt="Calvin Klein"
               width={300}
               height={300}
             />
@@ -88,8 +103,9 @@ export const Categories = () => {
             <h3>Tom Ford</h3>
             <Image
               className="topBrandsImage"
+              onClick={handleImageClick}
               src={images[3]}
-              alt="Eau Fraiche"
+              alt="Tom Ford"
               width={300}
               height={300}
             />
@@ -98,8 +114,9 @@ export const Categories = () => {
             <h3>Gucci</h3>
             <Image
               className="topBrandsImage"
+              onClick={handleImageClick}
               src={images[4]}
-              alt="Fruity"
+              alt="Gucci"
               width={300}
               height={300}
             />
