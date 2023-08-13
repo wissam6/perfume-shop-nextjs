@@ -1,8 +1,15 @@
+'use client';
+
 import * as React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 
 export default function Page() {
+  const router = useRouter();
+  React.useEffect(()=> {
+    router.push("/home");
+  }, [])
   return (
     <React.Fragment>
       <h1>Golden Perfume</h1>

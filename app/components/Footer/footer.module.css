@@ -1,0 +1,31 @@
+.footerDiv {
+  flex: 0 0 26.3889%;
+  max-width: 26.3889%;
+  margin-left: 20.8333%;
+  width: 100%;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.footerDiv ul {
+  list-style: none;
+  padding-left: 0px;
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  /* padding-inline-start: 40px; */
+}
+
+.footerTitle {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  color: rgb(97, 97, 97);
+  text-transform: uppercase;
+  /* margin-top: 20px; */
+  margin-bottom: calc(2rem + 6px);
+}
