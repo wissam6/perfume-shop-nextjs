@@ -55,21 +55,31 @@ export const Home = () => {
           Victoria&apos;s Secret Bare Rose Eau de Parfum, and Aqua Media Cologne
           Forte.
         </p>
-        <div className="float-container">
-          <div className="float-child">
+        <div className={styles.floatContainer}>
+          <div className={styles.floatChild}>
             <Image
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfw45WMsixBrEzKU5mb8T83gmNYzECQT_EQw&usqp=CAU"
               alt="woman with perfume"
+              sizes="100vw"
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
               width={500}
               height={300}
             />
           </div>
-          <div className="float-child">
+          <div className={styles.floatChild}>
             <Image
               src={topBrands[currentImage]}
               alt="new perfumes"
-              width={500}
-              height={300}
+              sizes="100vw"
+              style={{
+                width: "60%",
+                height: "auto",
+              }}
+              width={300}
+              height={500}
             />
           </div>
         </div>
@@ -92,21 +102,6 @@ export const Home = () => {
       <div className="footer">
         <Footer />
       </div>
-      <style>
-        {`
-        .float-container {
-            /* border: 3px solid #fff; */
-            padding: 20px;
-        }
-
-        .float-child {
-            width: 50%;
-            float: left;
-            padding: 20px;
-          /*   border: 2px solid red; */
-        }  
-        `}
-      </style>
     </div>
   );
 };

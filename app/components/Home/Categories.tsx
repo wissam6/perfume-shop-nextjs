@@ -69,7 +69,16 @@ export const Categories = () => {
               onClick={handleImageClick}
               className="topBrandsImage"
               src={images[0]}
+<<<<<<< HEAD
               alt="Versace"
+=======
+              alt="Eau de Cologne"
+              sizes="100vw"
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
+>>>>>>> 1b25b56 (feat: adaptive home)
               width={300}
               height={300}
             />
@@ -79,8 +88,16 @@ export const Categories = () => {
             <Image
               className="topBrandsImage"
               src={images[1]}
+<<<<<<< HEAD
               onClick={handleImageClick}
               alt="Dior"
+=======
+              alt="Eau de Toilette"
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
+>>>>>>> 1b25b56 (feat: adaptive home)
               width={300}
               height={300}
             />
@@ -91,7 +108,15 @@ export const Categories = () => {
               className="topBrandsImage"
               onClick={handleImageClick}
               src={images[2]}
+<<<<<<< HEAD
               alt="Calvin Klein"
+=======
+              alt="Eau de Parfum"
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
+>>>>>>> 1b25b56 (feat: adaptive home)
               width={300}
               height={300}
             />
@@ -105,7 +130,15 @@ export const Categories = () => {
               className="topBrandsImage"
               onClick={handleImageClick}
               src={images[3]}
+<<<<<<< HEAD
               alt="Tom Ford"
+=======
+              alt="Eau Fraiche"
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
+>>>>>>> 1b25b56 (feat: adaptive home)
               width={300}
               height={300}
             />
@@ -116,7 +149,15 @@ export const Categories = () => {
               className="topBrandsImage"
               onClick={handleImageClick}
               src={images[4]}
+<<<<<<< HEAD
               alt="Gucci"
+=======
+              alt="Fruity"
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
+>>>>>>> 1b25b56 (feat: adaptive home)
               width={300}
               height={300}
             />
@@ -136,11 +177,9 @@ export const Categories = () => {
         .pane-content:hover {
           /* transform: scale(1.1); */
         }
-        /* .k-pane {
-         background-color: #45B8AC;
-        } */
-        .k-splitbar {
-          background-color: white;
+        
+        .k-splitter .k-scrollable{
+          overflow-y: hidden;
         }
         .topBrandsImage:hover {
           transform: scale(1.1); 
