@@ -60,6 +60,10 @@ export const Home = () => {
             <Image
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfw45WMsixBrEzKU5mb8T83gmNYzECQT_EQw&usqp=CAU"
               alt="woman with perfume"
+              style={{
+                width: "70%",
+                height: "auto",
+              }}
               width={500}
               height={300}
             />
@@ -68,6 +72,10 @@ export const Home = () => {
             <Image
               src={topBrands[currentImage]}
               alt="new perfumes"
+              style={{
+                width: "50%",
+                height: "auto",
+              }}
               width={500}
               height={300}
             />

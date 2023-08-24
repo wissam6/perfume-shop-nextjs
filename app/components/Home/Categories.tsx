@@ -70,7 +70,12 @@ export const Categories = () => {
               className="topBrandsImage"
               src={images[0]}
               alt="Versace"
-              width={300}
+              sizes="100vw"
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
+              width={500}
               height={300}
             />
           </div>
@@ -81,7 +86,12 @@ export const Categories = () => {
               src={images[1]}
               onClick={handleImageClick}
               alt="Dior"
-              width={300}
+              sizes="100vw"
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
+              width={500}
               height={300}
             />
           </div>
@@ -92,7 +102,12 @@ export const Categories = () => {
               onClick={handleImageClick}
               src={images[2]}
               alt="Calvin Klein"
-              width={300}
+              sizes="100vw"
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
+              width={500}
               height={300}
             />
           </div>
@@ -106,7 +121,12 @@ export const Categories = () => {
               onClick={handleImageClick}
               src={images[3]}
               alt="Tom Ford"
-              width={300}
+              sizes="100vw"
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
+              width={500}
               height={300}
             />
           </div>
@@ -117,7 +137,12 @@ export const Categories = () => {
               onClick={handleImageClick}
               src={images[4]}
               alt="Gucci"
-              width={300}
+              sizes="100vw"
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
+              width={500}
               height={300}
             />
           </div>
