@@ -40,6 +40,7 @@
   }
   .video {
     transform: scale(0.92);
+    transform: scale(0.92);
     height: 500px;
     object-fit: fill;
     position: relative;
