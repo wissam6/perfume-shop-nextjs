@@ -33,8 +33,9 @@ export const Categories = () => {
             alt="Versace"
             sizes="100vw"
             style={{
-              width: "70%",
+              width: "100%",
               height: "auto",
+              scale: 0.7,
             }}
             width={500}
             height={300}
@@ -48,8 +49,9 @@ export const Categories = () => {
             alt="Dior"
             sizes="100vw"
             style={{
-              width: "60%",
+              width: "100%",
               height: "auto",
+              scale: 0.5,
             }}
             width={500}
             height={300}
@@ -65,8 +67,9 @@ export const Categories = () => {
             alt="Tom Ford"
             sizes="100vw"
             style={{
-              width: "70%",
+              width: "100%",
               height: "auto",
+              scale: 0.7,
             }}
             width={500}
             height={300}
@@ -80,8 +83,9 @@ export const Categories = () => {
             alt="Gucci"
             sizes="100vw"
             style={{
-              width: "70%",
+              width: "100%",
               height: "auto",
+              scale: 0.7,
             }}
             width={500}
             height={300}
