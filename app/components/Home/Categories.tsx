@@ -106,8 +106,11 @@ export const Categories = () => {
         .k-splitbar {
           background-color: white;
         }
+        .topBrandsImage {
+          transition: all .5s ease-in-out;
+        }
         .topBrandsImage:hover {
-         /*  transform: scale(1.1);  */
+          transform: scale(1.1);
         }
         .float-container {
           /* border: 3px solid #fff; */

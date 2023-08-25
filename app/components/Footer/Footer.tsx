@@ -7,7 +7,7 @@ export const Footer = () => {
       <div
         style={{
           bottom: 0,
-          height: "35vh",
+          height: "100%",
           width: "100%",
           backgroundColor: "lightgrey",
           display: "flex",
