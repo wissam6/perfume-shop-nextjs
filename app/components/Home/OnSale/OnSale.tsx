@@ -32,7 +32,7 @@ export const OnSale = () => {
       <div className="float-container">
         <div className="float-child">
           <Image
-            src="https://media4.s-nbcnews.com/i/streams/2014/June/140604/2D274906019762-today-rihanna-perfume-140604-tease.jpg"
+            src="https://assets.teenvogue.com/photos/649509494d05f2cdc3e1b25d/master/pass/GettyImages-916194640%20(1).jpg"
             alt="sale"
             sizes="100vw"
             style={{
@@ -57,6 +57,7 @@ export const OnSale = () => {
                   <h3
                     style={{
                       paddingLeft: "10px",
+                      position: "absolute",
                     }}
                   >
                     <div>
@@ -69,9 +70,6 @@ export const OnSale = () => {
                   <Image
                     src={item.image}
                     alt={item.name}
-                    /* className={styles.scrollview}
-                    width={700}
-                    height={325} */
                     style={{
                       width: "100%",
                       height: "auto",
