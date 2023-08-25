@@ -5,6 +5,7 @@ import { ScrollView } from "@progress/kendo-react-scrollview";
 import Image from "next/image";
 import { db } from "../../../firebase";
 import { collection, getDocs } from "firebase/firestore";
+import styles from "./onsale.module.css";
 
 export const OnSale = () => {
   const [data, setData] = React.useState([]);
@@ -31,18 +32,20 @@ export const OnSale = () => {
       <div className="float-container">
         <div className="float-child">
           <Image
-            src="https://media4.s-nbcnews.com/i/streams/2014/June/140604/2D274906019762-today-rihanna-perfume-140604-tease.jpg"
+            src="https://assets.teenvogue.com/photos/649509494d05f2cdc3e1b25d/master/pass/GettyImages-916194640%20(1).jpg"
             alt="sale"
-            width={700}
-            height={385}
+            sizes="100vw"
+            style={{
+              width: "100%",
+              height: "auto",
+            }}
+            width={500}
+            height={300}
           />
         </div>
         <div className="onSale float-child">
           <ScrollView
-            style={{
-              width: "100%",
-              height: 385,
-            }}
+            className={styles.scrollview}
             automaticViewChange={true}
             automaticViewChangeInterval={2000}
           >
@@ -51,15 +54,10 @@ export const OnSale = () => {
               newPrice = item.price - newPrice;
               return (
                 <div key={index}>
-                  <Image
-                    src={item.image}
-                    alt={item.name}
-                    width={700}
-                    height={325}
-                  />
                   <h3
                     style={{
                       paddingLeft: "10px",
+                      position: "absolute",
                     }}
                   >
                     <div>
@@ -69,6 +67,16 @@ export const OnSale = () => {
                     </div>
                     <div>New Price: {newPrice}</div>
                   </h3>
+                  <Image
+                    src={item.image}
+                    alt={item.name}
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                    }}
+                    width={500}
+                    height={300}
+                  />
                 </div>
               );
             })}

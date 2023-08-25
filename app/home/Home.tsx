@@ -8,10 +8,10 @@ import styles from "./home.module.css";
 import Image from "next/image";
 
 const topBrands = [
-  "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1687372056-screen-shot-2023-06-21-at-2-27-02-pm-64934109487c8.png?crop=1.00xw:0.807xh;0,0.119xh&resize=980:*",
-  "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1687373539-screen-shot-2023-06-21-at-2-51-36-pm-649346d645136.png?crop=0.99812382739212xw:1xh;center,top&resize=980:*",
-  "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1689716280-screen-shot-2023-07-18-at-5-36-58-pm-64b70601da0a5.png?crop=1xw:0.9888392857142857xh;center,top&resize=980:*",
-  "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1689716280-screen-shot-2023-07-18-at-5-36-58-pm-64b70601da0a5.png?crop=1xw:0.9888392857142857xh;center,top&resize=980:*",
+  "https://media.cnn.com/api/v1/images/stellar/prod/210203182253-perfume-gucci-bloom-eau-de-parfum.jpg?q=w_1700,h_956,x_0,y_0,c_fill",
+  "https://media.cnn.com/api/v1/images/stellar/prod/220707134827-editors-perfume-missdior.jpg?c=original",
+  "https://media.cnn.com/api/v1/images/stellar/prod/210203183829-perfume-viktorrolf-flowerbomb.jpg?q=w_1700,h_956,x_0,y_0,c_fill",
+  "https://content.api.news/v3/images/bin/d2dcf285e80b82a7348ef9af58aaf30b",
 ];
 const NUMBER_OF_PICTURES = 3;
 export const Home = () => {
@@ -58,8 +58,12 @@ export const Home = () => {
         <div className="float-container">
           <div className="float-child">
             <Image
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfw45WMsixBrEzKU5mb8T83gmNYzECQT_EQw&usqp=CAU"
+              src="https://wwd.com/wp-content/uploads/2021/12/best-perfumes.jpg?w=911"
               alt="woman with perfume"
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
               width={500}
               height={300}
             />
@@ -68,6 +72,10 @@ export const Home = () => {
             <Image
               src={topBrands[currentImage]}
               alt="new perfumes"
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
               width={500}
               height={300}
             />
@@ -102,7 +110,7 @@ export const Home = () => {
         .float-child {
             width: 50%;
             float: left;
-            padding: 20px;
+            /* padding: 20px; */
           /*   border: 2px solid red; */
         }  
         `}

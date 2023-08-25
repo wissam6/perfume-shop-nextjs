@@ -1,17 +1,5 @@
-/* "use client"; */
-
 import * as React from "react";
-
-import { Splitter, SplitterOnChangeEvent } from "@progress/kendo-react-layout";
 import Image from "next/image";
-import {
-  Slide,
-  Push,
-  Expand,
-  Fade,
-  Zoom,
-  Reveal,
-} from "@progress/kendo-react-animation";
 
 import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
@@ -28,21 +16,6 @@ const images = [
 export const Categories = () => {
   const params = useParams();
   const router = useRouter();
-  const [panes, setPanes] = React.useState<Array<any>>([
-    { size: "33%", resizable: false },
-    {},
-    { size: "33%", resizable: false },
-  ]);
-  const [panes2, setPanes2] = React.useState<Array<any>>([
-    { size: "50%", resizable: false },
-    {},
-    { size: "50%", resizable: false },
-  ]);
-  const [nestedPanes, setNestedPanes] = React.useState<Array<any>>([
-    { size: "50%", resizable: false },
-    {},
-    { size: "50%", resizable: false },
-  ]);
 
   const handleImageClick = (e) => {
     router.push(`/productcategory/${e.target.alt}`);
@@ -50,79 +23,76 @@ export const Categories = () => {
 
   return (
     <div>
-      <Splitter
-        style={{
-          height: 750,
-        }}
-        panes={nestedPanes}
-        orientation={"vertical"}
-      >
-        {/*   <Push> */}
-        <Splitter panes={panes}>
-          <div className="pane-content">
-            <h3>Chanel</h3>
+      <div className="float-container">
+        <div className="float-child pane-content">
+          <h3>Chanel</h3>
+          <Image
+            onClick={handleImageClick}
+            className="topBrandsImage"
+            src={images[0]}
+            alt="Versace"
+            sizes="100vw"
+            style={{
+              width: "100%",
+              height: "auto",
+              scale: 0.7,
+            }}
+            width={500}
+            height={300}
+          />
 
-            <Image
-              /* style={{
-                mixBlendMode: "multiply",
-              }} */
-              onClick={handleImageClick}
-              className="topBrandsImage"
-              src={images[0]}
-              alt="Versace"
-              width={300}
-              height={300}
-            />
-          </div>
-          <div className="pane-content">
-            <h3>Calvin Klein</h3>
-            <Image
-              className="topBrandsImage"
-              src={images[1]}
-              onClick={handleImageClick}
-              alt="Dior"
-              width={300}
-              height={300}
-            />
-          </div>
-          <div className="pane-content">
-            <h3>Dior</h3>
-            <Image
-              className="topBrandsImage"
-              onClick={handleImageClick}
-              src={images[2]}
-              alt="Calvin Klein"
-              width={300}
-              height={300}
-            />
-          </div>
-        </Splitter>
-        {/*   </Push> */}
-        <Splitter panes={panes2}>
-          <div className="pane-content">
-            <h3>Tom Ford</h3>
-            <Image
-              className="topBrandsImage"
-              onClick={handleImageClick}
-              src={images[3]}
-              alt="Tom Ford"
-              width={300}
-              height={300}
-            />
-          </div>
-          <div className="pane-content">
-            <h3>Gucci</h3>
-            <Image
-              className="topBrandsImage"
-              onClick={handleImageClick}
-              src={images[4]}
-              alt="Gucci"
-              width={300}
-              height={300}
-            />
-          </div>
-        </Splitter>
-      </Splitter>
+          <h3>Calvin Klein</h3>
+          <Image
+            className="topBrandsImage"
+            src={images[1]}
+            onClick={handleImageClick}
+            alt="Dior"
+            sizes="100vw"
+            style={{
+              width: "100%",
+              height: "auto",
+              scale: 0.5,
+            }}
+            width={500}
+            height={300}
+          />
+        </div>
+
+        <div className="float-child pane-content">
+          <h3>Tom Ford</h3>
+          <Image
+            className="topBrandsImage"
+            onClick={handleImageClick}
+            src={images[3]}
+            alt="Tom Ford"
+            sizes="100vw"
+            style={{
+              width: "100%",
+              height: "auto",
+              scale: 0.7,
+            }}
+            width={500}
+            height={300}
+          />
+
+          <h3>Gucci</h3>
+          <Image
+            className="topBrandsImage"
+            onClick={handleImageClick}
+            src={images[4]}
+            alt="Gucci"
+            sizes="100vw"
+            style={{
+              width: "100%",
+              height: "auto",
+              scale: 0.7,
+            }}
+            width={500}
+            height={300}
+          />
+        </div>
+      </div>
+
       <style>
         {`
         .pane-content { 
@@ -133,18 +103,26 @@ export const Categories = () => {
           margin-right: auto;
           width: 50%;
         }
-        .pane-content:hover {
-          /* transform: scale(1.1); */
-        }
-        /* .k-pane {
-         background-color: #45B8AC;
-        } */
         .k-splitbar {
           background-color: white;
         }
-        .topBrandsImage:hover {
-          transform: scale(1.1); 
+        .topBrandsImage {
+          transition: all .5s ease-in-out;
         }
+        .topBrandsImage:hover {
+          transform: scale(1.1);
+        }
+        .float-container {
+          /* border: 3px solid #fff; */
+          padding: 20px;
+      }
+
+      .float-child {
+          width: 50%;
+          float: left;
+          padding: 20px;
+        /*   border: 2px solid red; */
+      }  
         `}
       </style>
     </div>

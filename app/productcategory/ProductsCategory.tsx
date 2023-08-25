@@ -53,13 +53,20 @@ export const ProductsCategory = (props) => {
         }}
       >
         <GridLayout
-          gap={{ rows: 6, cols: 3 }}
-          rows={[{ height: 320 }, { height: 320 }]}
+          gap={{
+            rows: 20,
+            cols: 40,
+          }}
           cols={[
-            { width: 270 },
-            { width: 270 },
-            { width: 270 },
-            { width: 270 },
+            {
+              width: "30%",
+            },
+            {
+              width: "30%",
+            },
+            {
+              width: "30%",
+            },
           ]}
         >
           {data.map((item, index) => {

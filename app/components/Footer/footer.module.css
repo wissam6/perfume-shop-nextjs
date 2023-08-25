@@ -1,7 +1,7 @@
 .footerDiv {
   flex: 0 0 26.3889%;
   max-width: 26.3889%;
-  margin-left: 20.8333%;
+  margin-left: 10.8333%;
   width: 100%;
   padding-left: 16px;
   padding-right: 16px;
@@ -15,6 +15,7 @@
   margin-block-end: 1em;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
+  font-size: 1.6vw;
   /* padding-inline-start: 40px; */
 }
 
@@ -28,4 +29,5 @@
   text-transform: uppercase;
   /* margin-top: 20px; */
   margin-bottom: calc(2rem + 6px);
+  font-size: 1.5vw;
 }
