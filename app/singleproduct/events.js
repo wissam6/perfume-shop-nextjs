@@ -1,24 +1,4 @@
-export interface TimelineEventProps {
-  description: string;
-  date: Date;
-  title: string;
-  subtitle?: string;
-  images?: { src: string; alt?: string }[];
-  actions?: { text: string; url: string }[];
-}
-declare global {
-  interface Date {
-    addDays(date?: Date): Date;
-  }
-}
-
-Date.prototype.addDays = function (days) {
-  var date: any = new Date(this.valueOf());
-  date.setDate(date.getDate() + days);
-  return date;
-};
-
-export const events: TimelineEventProps[] = [
+export const events = [
   {
     description:
       "After add the item to cart, and paying, the purchase will first get into review",
