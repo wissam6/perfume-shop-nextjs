@@ -6,9 +6,14 @@ export interface TimelineEventProps {
   images?: { src: string; alt?: string }[];
   actions?: { text: string; url: string }[];
 }
+declare global {
+  interface Date {
+    addDays(date?: Date): Date;
+  }
+}
 
 Date.prototype.addDays = function (days) {
-  var date = new Date(this.valueOf());
+  var date: any = new Date(this.valueOf());
   date.setDate(date.getDate() + days);
   return date;
 };
