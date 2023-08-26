@@ -53,7 +53,6 @@ export const SingleProduct = (props) => {
                 height: "500px",
                 padding: "10px",
               }}
-              onClick={(e) => handleCardClick(e, item.id)}
             >
               {/* <CardImage src={item.image} /> */}
               <div className="k-vbox">
