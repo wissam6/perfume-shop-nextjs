@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export const MyCommandCell = (props) => {
+export const MyCommandCell = (props: any) => {
   const { dataItem } = props;
   const inEdit = dataItem[props.editField];
   const isNewItem = dataItem.id === undefined;

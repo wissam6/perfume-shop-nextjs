@@ -17,7 +17,7 @@ export const Categories = () => {
   const params = useParams();
   const router = useRouter();
 
-  const handleImageClick = (e) => {
+  const handleImageClick = (e: any) => {
     router.push(`/productcategory/${e.target.alt}`);
   };
 

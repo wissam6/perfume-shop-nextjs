@@ -16,14 +16,18 @@ export const SignIn = () => {
   const [loggedUser, setLoggedUser] = React.useState();
 
   const router = useRouter();
-  const handleSubmit = ({ email, password }) => {
+  interface submitProps {
+    email: string;
+    password: string;
+  }
+  const handleSubmit: any = ({ email, password }: submitProps) => {
     submit(email, password);
   };
 
   const submit = async (email: string, password: string) => {
     let emailExists = false;
     let hashPassword;
-    let userName;
+    let userName: any;
 
     const querySnapshot = await getDocs(collection(db, "users"));
 

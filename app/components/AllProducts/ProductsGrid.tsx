@@ -125,7 +125,7 @@ export const AllProducts = () => {
     />
   );
 
-  const ImageCell = (props) => {
+  const ImageCell = (props: any) => {
     return (
       <td>
         <Image
