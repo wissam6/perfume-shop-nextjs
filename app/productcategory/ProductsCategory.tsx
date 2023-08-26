@@ -13,8 +13,10 @@ import {
 } from "@progress/kendo-react-layout";
 import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
+import { useRouter } from "next/navigation";
 
 export const ProductsCategory = (props) => {
+  const router = useRouter();
   const product = props.product;
   const [data, setData] = React.useState([]);
   const fetchData = async () => {
@@ -30,6 +32,10 @@ export const ProductsCategory = (props) => {
     });
     console.log(products);
     setData(products);
+  };
+
+  const handleCardClick = (e, id) => {
+    router.push(`/singleproduct/${id}`);
   };
 
   React.useEffect(() => {
@@ -77,6 +83,7 @@ export const ProductsCategory = (props) => {
                   style={{
                     height: "300px",
                   }}
+                  onClick={(e) => handleCardClick(e, item.id)}
                 >
                   <CardImage src={item.image} />
                   <div className="k-vbox">
