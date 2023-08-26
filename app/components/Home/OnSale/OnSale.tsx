@@ -18,7 +18,7 @@ export const OnSale = () => {
       products = [...products, docData];
     });
     const highestSale = products.sort(
-      (a, b) => parseFloat(b.sale) - parseFloat(a.sale)
+      (a: any, b: any) => parseFloat(b.sale) - parseFloat(a.sale)
     );
     setData(highestSale.slice(0, 4));
   };

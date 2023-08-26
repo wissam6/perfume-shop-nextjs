@@ -18,7 +18,18 @@ const bcrypt = require("bcryptjs");
 
 export const SignUp = () => {
   const router = useRouter();
-  const handleSubmit = ({ email, username, password, confirmpassword }) => {
+  interface submitProps {
+    email: string;
+    username: string;
+    password: string;
+    confirmpassword: string;
+  }
+  const handleSubmit: any = ({
+    email,
+    username,
+    password,
+    confirmpassword,
+  }: submitProps) => {
     submit(email, username, password, confirmpassword);
   };
 
@@ -29,7 +40,7 @@ export const SignUp = () => {
     confirmpassword: string
   ) => {
     const querySnapshot = await getDocs(collection(db, "users"));
-    let emailExists: boolean,
+    let emailExists: any,
       userNameExists: boolean = false;
     querySnapshot.forEach((doc) => {
       if (doc.data().email === email) {

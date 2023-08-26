@@ -6,7 +6,7 @@ import {
   deleteDoc,
   doc,
 } from "firebase/firestore";
-let data = [];
+let data: any = [];
 
 const fetchData = async () => {
   let products: any = [];
