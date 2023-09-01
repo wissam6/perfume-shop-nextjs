@@ -2,13 +2,25 @@
 
 import * as React from "react";
 import {
-  Grid,
+  //Grid,
   GridCellProps,
   GridColumn as Column,
   GridItemChangeEvent,
   GridToolbar,
   GridDataStateChangeEvent,
 } from "@progress/kendo-react-grid";
+import dynamic from "next/dynamic";
+
+const MyGrid: any = dynamic(
+  () =>
+    import("@progress/kendo-react-grid").then(
+      (module) => module.Grid
+    ) as any /* ,
+  {
+    ssr: false,
+  } */
+);
+
 import { ExcelExport } from "@progress/kendo-react-excel-export";
 import { Button } from "@progress/kendo-react-buttons";
 import { MyCommandCell } from "./MyCommandCell";
@@ -157,7 +169,7 @@ export const AllProducts = () => {
     <ExcelExport data={data} ref={_export}>
       <div style={{ height: "100%" }}>
         {data.length === 0 && loadingPanel}
-        <Grid
+        <MyGrid
           id="allproducts"
           style={{ height: data.length !== 0 ? "100%" : "700px" }}
           onItemChange={itemChange}
@@ -202,7 +214,7 @@ export const AllProducts = () => {
           <Column field="sale" title="Sale" editor="numeric" />
           <Column field="price" title="Price" editor="numeric" />
           <Column cell={CommandCell} width="200px" filterable={false} />
-        </Grid>
+        </MyGrid>
       </div>
     </ExcelExport>
   );

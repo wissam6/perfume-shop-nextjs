@@ -2,7 +2,6 @@ import * as React from "react";
 import Image from "next/image";
 
 import { useRouter } from "next/navigation";
-import { useParams } from "next/navigation";
 
 //import './styles.css';
 const images = [
@@ -14,7 +13,6 @@ const images = [
 ];
 
 export const Categories = () => {
-  const params = useParams();
   const router = useRouter();
 
   const handleImageClick = (e: any) => {
