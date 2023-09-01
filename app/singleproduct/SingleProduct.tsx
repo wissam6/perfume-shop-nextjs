@@ -16,31 +16,62 @@ import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { Button } from "@progress/kendo-react-buttons";
 import { events } from "./events";
+import { DropDownList } from "@progress/kendo-react-dropdowns";
 
 export const SingleProduct = (props) => {
   const [item, setItem]: any = React.useState();
+  const [sizes, setSizes]: any = React.useState();
+  const [price, setPrice] = React.useState();
+  const [rating, setRating] = React.useState();
+  const [stock, setStock] = React.useState();
   const fetchData = async () => {
-    //to be replaced by fetching only the needed category
-    let products: any = [];
+    const sizesValues: string[] = [];
     const querySnapshot = await getDocs(collection(db, "perfumes"));
     querySnapshot.forEach((doc) => {
       if (doc.id.toLowerCase() === props.ID) {
         setItem(doc.data());
-        console.log(doc.data());
+        setPrice(doc.data().price);
+        setRating(doc.data().rating);
+        setStock(doc.data().stock);
+        querySnapshot.forEach((doc2) => {
+          if (
+            doc2.data().name === doc.data().name &&
+            doc2.data().brand === doc.data().brand
+          ) {
+            sizesValues.push(doc2.data().size);
+          }
+        });
+        setSizes(sizesValues);
       }
     });
   };
+
   const sortedEvents = sortEventList(events);
   React.useEffect(() => {
     fetchData();
   }, []);
+
+  const handleChange = async (e) => {
+    const selectedSize = e.value;
+    const querySnapshot = await getDocs(collection(db, "perfumes"));
+    querySnapshot.forEach((doc) => {
+      if (
+        doc.data().name === item.name &&
+        doc.data().brand === item.brand &&
+        doc.data().size === selectedSize
+      ) {
+        setPrice(doc.data().price);
+        setRating(doc.data().rating);
+        setStock(doc.data().stock);
+      }
+    });
+  };
+
   return (
     <>
       <div
         style={{
           display: "flex",
-          //justifyContent: "space-evenly",
-          //flexWrap: "wrap",
           padding: "35px",
           width: "50%",
           margin: "0 auto",
@@ -56,7 +87,6 @@ export const SingleProduct = (props) => {
                 padding: "10px",
               }}
             >
-              {/* <CardImage src={item.image} /> */}
               <div className="k-vbox">
                 <CardHeader>
                   <CardTitle>{item.name}</CardTitle>
@@ -69,11 +99,22 @@ export const SingleProduct = (props) => {
                       paddingLeft: "0px",
                     }}
                   >
-                    <li>price: {item.price}</li>
-                    <li>rating: {item.rating}</li>
+                    <li>price: {price}</li>
+                    <li>rating: {rating}</li>
                     <li>sex: {item.sex}</li>
-                    <li>size: {item.size}</li>
-                    <li>remaining: {item.stock}</li>
+                    <li>
+                      size:{" "}
+                      {sizes.length > 1 ? (
+                        <DropDownList
+                          data={sizes}
+                          defaultValue={item.size}
+                          onChange={handleChange}
+                        />
+                      ) : (
+                        item.size
+                      )}
+                    </li>
+                    <li>remaining: {stock}</li>
                   </ul>
                 </CardBody>
                 <CardActions>
