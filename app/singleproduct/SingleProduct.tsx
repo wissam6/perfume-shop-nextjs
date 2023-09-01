@@ -39,9 +39,11 @@ export const SingleProduct = (props) => {
       <div
         style={{
           display: "flex",
-          justifyContent: "space-evenly",
-          flexWrap: "wrap",
+          //justifyContent: "space-evenly",
+          //flexWrap: "wrap",
           padding: "35px",
+          width: "50%",
+          margin: "0 auto",
         }}
       >
         {item && (
