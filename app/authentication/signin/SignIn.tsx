@@ -5,15 +5,33 @@ import {
   Form,
   Field,
   FormElement,
+  FieldRenderProps,
   FormRenderProps,
+  FieldWrapper,
 } from "@progress/kendo-react-form";
 import { Input } from "@progress/kendo-react-inputs";
+import { Error, Hint } from "@progress/kendo-react-labels";
 import { db } from "../../firebase";
 import { collection, getDocs } from "firebase/firestore";
+import Link from "next/link";
 const bcrypt = require("bcryptjs");
+
+const emailRegex: RegExp = new RegExp(/\S+@\S+\.\S+/);
+const emailValidator = (value: string) =>
+  emailRegex.test(value) ? "" : "Please enter a valid email.";
 
 export const SignIn = () => {
   const [loggedUser, setLoggedUser] = React.useState();
+
+  const EmailInput = (fieldRenderProps: FieldRenderProps) => {
+    const { validationMessage, visited, ...others } = fieldRenderProps;
+    return (
+      <div className="k-form-field-wrap">
+        <Input {...others} labelClassName={"k-form-label"} />
+        {visited && validationMessage && <Error>{validationMessage}</Error>}
+      </div>
+    );
+  };
 
   const router = useRouter();
   interface submitProps {
@@ -80,9 +98,11 @@ export const SignIn = () => {
                 <div className="mb-3">
                   <Field
                     name={"email"}
-                    component={Input}
+                    component={EmailInput}
                     label={"Email"}
                     required
+                    /* server side validation is used instead */
+                    //validator={emailValidator}
                   />
                 </div>
                 <div className="mb-3">
@@ -108,6 +128,12 @@ export const SignIn = () => {
             </FormElement>
           )}
         />
+        <Hint>
+          Don't have an account?{" "}
+          <Link style={{ marginLeft: "5px", color: "red" }} href="./signup">
+            Sign Up
+          </Link>
+        </Hint>
       </div>
     </React.Fragment>
   );
