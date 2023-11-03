@@ -2,16 +2,15 @@
 
 import * as React from "react";
 import {
-  Avatar,
   AppBar,
   AppBarSection,
   AppBarSpacer,
 } from "@progress/kendo-react-layout";
-import { Badge, BadgeContainer } from "@progress/kendo-react-indicators";
 import { Popup } from "@progress/kendo-react-popup";
 import Link from "next/link";
-let kendokaAvatar =
-  "https://www.telerik.com/kendo-react-ui-develop/components/images/kendoka-react.png";
+import { SvgIcon } from "@progress/kendo-react-common";
+
+import { loginIcon, plusCircleIcon } from "@progress/kendo-svg-icons";
 
 export const Header = () => {
   const [show, setShow] = React.useState(false);
@@ -38,35 +37,30 @@ export const Header = () => {
           <AppBarSection className="appbar-items">
             <ul>
               <li>
-                <span>About Us</span>
+                <Link href="./aboutus">About Us</Link>
               </li>
               <li>
-                <span>Our Top Brands</span>
+                <Link href="./home#our-top-brands">Our Top Brands</Link>
               </li>
               <li>
-                <span>All Products</span>
+                <Link href="./allproducts">All Products</Link>
               </li>
               <li>
-                <span>Contact Us</span>
+                <Link href="./home#contact-us">Contact Us</Link>
               </li>
             </ul>
           </AppBarSection>
 
           <AppBarSpacer />
-
-          <AppBarSection className="user-actions">
-            <button className="k-button k-button-md k-rounded-md k-button-flat k-button-flat-base">
-              <BadgeContainer>
-                <span className="k-icon k-i-bell" />
-                <Badge
-                  shape="dot"
-                  themeColor="info"
-                  size="small"
-                  position="inside"
-                />
-              </BadgeContainer>
-            </button>
-            <span className="k-appbar-separator" />
+          <AppBarSection>
+            <Link href="./authentication/signin">
+              Sign In <SvgIcon icon={loginIcon} />
+            </Link>
+          </AppBarSection>
+          <AppBarSection>
+            <Link href="./authentication/signup">
+              Sign Up <SvgIcon icon={plusCircleIcon} />
+            </Link>
           </AppBarSection>
           <AppBarSection>
             <button

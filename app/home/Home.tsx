@@ -46,7 +46,9 @@ export const Home = () => {
         </video>
       </div>
       <div className={styles.categories}>
-        <h3 className={styles.title}>Our Top Brands</h3>
+        <h3 className={styles.title} id={"our-top-brands"}>
+          Our Top Brands
+        </h3>
         <p style={{ paddingLeft: "20px" }}>
           We offer a wide collection of the most popular and most used perfumes
           of the best brands. We are partners with Dior, Chanel, Calven Klein,
@@ -98,6 +100,9 @@ export const Home = () => {
         <OnSale />
       </div>
       <div className="footer">
+        <h3 className={styles.title} id={"contact-us"}>
+          Contact Us
+        </h3>
         <Footer />
       </div>
       <style>

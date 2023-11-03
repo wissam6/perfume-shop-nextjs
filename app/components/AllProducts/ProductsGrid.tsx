@@ -9,6 +9,7 @@ import {
   GridToolbar,
   GridDataStateChangeEvent,
 } from "@progress/kendo-react-grid";
+import Link from "next/link";
 import dynamic from "next/dynamic";
 
 const MyGrid: any = dynamic(
@@ -184,6 +185,9 @@ export const AllProducts = () => {
           onDataStateChange={dataStateChange}
         >
           <GridToolbar>
+            <Button themeColor="primary">
+              <Link href="./home">Back to Home</Link>
+            </Button>
             <Button title="Add new" themeColor="primary" onClick={addNew}>
               Add new
             </Button>
