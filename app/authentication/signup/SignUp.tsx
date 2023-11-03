@@ -6,7 +6,6 @@ import {
   Form,
   Field,
   FormElement,
-  FieldRenderProps,
   FormRenderProps,
 } from "@progress/kendo-react-form";
 import { Error } from "@progress/kendo-react-labels";
@@ -51,7 +50,7 @@ export const SignUp = () => {
       }
     });
 
-    if (!emailExists && !userNameExists) {
+    if (!emailExists && !userNameExists && password === confirmpassword) {
       try {
         const docRef = await addDoc(collection(db, "users"), {
           userName: userName,
@@ -65,6 +64,8 @@ export const SignUp = () => {
       }
     } else if (!emailExists && userNameExists) {
       window.alert("username already exists");
+    } else if (password !== confirmpassword) {
+      window.alert("passwords do not match");
     } else {
       window.alert("email already exists");
     }
