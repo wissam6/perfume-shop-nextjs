@@ -8,11 +8,12 @@ import {
   FormElement,
   FormRenderProps,
 } from "@progress/kendo-react-form";
-import { Error } from "@progress/kendo-react-labels";
+import { Error, Hint } from "@progress/kendo-react-labels";
 import { Input } from "@progress/kendo-react-inputs";
 import { db } from "../../firebase";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 const bcrypt = require("bcryptjs");
 
 export const SignUp = () => {
@@ -136,6 +137,12 @@ export const SignUp = () => {
             </FormElement>
           )}
         />
+        <Hint>
+          Already have an account?{" "}
+          <Link style={{ marginLeft: "5px", color: "red" }} href="./signin">
+            Sign In
+          </Link>
+        </Hint>
       </div>
     </React.Fragment>
   );
