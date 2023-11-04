@@ -1,14 +1,11 @@
 "use client";
 import { SignUp } from "./SignUp";
-import Link from "next/link";
-import { Button } from "@progress/kendo-react-buttons";
+import { BackToHome } from "../../components/BackToHome/BackToHome";
 
 export default function Page() {
   return (
     <>
-      <Button>
-        <Link href="../home">Back to Home</Link>
-      </Button>
+      <BackToHome />
       <SignUp />
     </>
   );

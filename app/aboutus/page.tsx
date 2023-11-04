@@ -1,12 +1,9 @@
 "use client";
-import Link from "next/link";
-import { Button } from "@progress/kendo-react-buttons";
+import { BackToHome } from "../components/BackToHome/BackToHome";
 export default function Page() {
   return (
     <>
-      <Button>
-        <Link href="./home">Back to Home</Link>
-      </Button>
+      <BackToHome />
       <br />
       <br />
       Golden Perfume has been established in 2023 and is a rising perfume
