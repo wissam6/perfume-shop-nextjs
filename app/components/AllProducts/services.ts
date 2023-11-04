@@ -1,11 +1,6 @@
 import { db } from "../../firebase";
-import {
-  collection,
-  getDocs,
-  addDoc,
-  deleteDoc,
-  doc,
-} from "firebase/firestore";
+import { collection, getDocs, addDoc } from "firebase/firestore";
+import { Product } from "./interfaces";
 let data: any = [];
 
 const fetchData = async () => {
@@ -19,7 +14,22 @@ const fetchData = async () => {
   data = products;
 };
 
-const insertToDatabase = async (item) => {
+interface itemInterface extends Product {
+  id?: number;
+  brand?: string;
+  country?: string;
+  image?: string;
+  name?: string;
+  price?: number;
+  rating?: number;
+  sale?: number;
+  sex?: string;
+  size?: number;
+  stock?: number;
+  type?: string;
+}
+
+const insertToDatabase = async (item: itemInterface) => {
   try {
     const docRef = await addDoc(collection(db, "perfumes"), {
       id: item.id,
@@ -47,10 +57,10 @@ const insertToDatabase = async (item) => {
 
 fetchData();
 
-const generateId = (data) =>
+const generateId = (data: any[]) =>
   data.reduce((acc, current) => Math.max(acc, current.id), 0) + 1;
 
-export const insertItem = (item) => {
+export const insertItem = (item: itemInterface) => {
   item.id = generateId(data);
   item.inEdit = false;
   data.unshift(item);
@@ -62,14 +72,14 @@ export const getItems = () => {
   return data;
 };
 
-export const updateItem = (item) => {
-  let index = data.findIndex((record) => record.id === item.id);
+export const updateItem = (item: itemInterface) => {
+  let index = data.findIndex((record: Product) => record.id === item.id);
   data[index] = item;
   return data;
 };
 
-export const deleteItem = (item) => {
-  let index = data.findIndex((record) => record.id === item.id);
+export const deleteItem = (item: itemInterface) => {
+  let index = data.findIndex((record: Product) => record.id === item.id);
   data.splice(index, 1);
   return data;
 };

@@ -16,9 +16,12 @@ import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { Button } from "@progress/kendo-react-buttons";
 import { events } from "./events";
-import { DropDownList } from "@progress/kendo-react-dropdowns";
+import {
+  DropDownList,
+  DropDownListChangeEvent,
+} from "@progress/kendo-react-dropdowns";
 
-export const SingleProduct = (props) => {
+export const SingleProduct = (props: any) => {
   const [item, setItem]: any = React.useState();
   const [sizes, setSizes]: any = React.useState();
   const [price, setPrice] = React.useState();
@@ -51,7 +54,7 @@ export const SingleProduct = (props) => {
     fetchData();
   }, []);
 
-  const handleChange = async (e) => {
+  const handleChange = async (e: DropDownListChangeEvent) => {
     const selectedSize = e.value;
     const querySnapshot = await getDocs(collection(db, "perfumes"));
     querySnapshot.forEach((doc) => {

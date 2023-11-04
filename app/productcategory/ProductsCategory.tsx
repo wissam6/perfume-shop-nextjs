@@ -15,10 +15,25 @@ import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 
-export const ProductsCategory = (props) => {
+interface itemInterface {
+  id?: number;
+  brand?: string;
+  country?: string;
+  image?: string;
+  name?: string;
+  price?: number;
+  rating?: number;
+  sale?: number;
+  sex?: string;
+  size?: number;
+  stock?: number;
+  type?: string;
+}
+
+export const ProductsCategory = (props: any) => {
   const router = useRouter();
   const product = props.product;
-  const [data, setData] = React.useState([]);
+  const [data, setData] = React.useState<itemInterface[]>([]);
   const fetchData = async () => {
     //to be replaced by fetching only the needed category
     let products: any = [];
@@ -34,7 +49,7 @@ export const ProductsCategory = (props) => {
     setData(products);
   };
 
-  const handleCardClick = (e, id) => {
+  const handleCardClick = (e: React.MouseEvent<HTMLElement>, id: number) => {
     router.push(`/singleproduct/${id}`);
   };
 
@@ -75,7 +90,7 @@ export const ProductsCategory = (props) => {
             },
           ]}
         >
-          {data.map((item, index) => {
+          {data.map((item: any, index) => {
             return (
               <GridLayoutItem key={item.id}>
                 <Card
@@ -83,7 +98,9 @@ export const ProductsCategory = (props) => {
                   style={{
                     height: "300px",
                   }}
-                  onClick={(e) => handleCardClick(e, item.id)}
+                  onClick={(e: React.MouseEvent<HTMLElement>) =>
+                    handleCardClick(e, item.id)
+                  }
                 >
                   <CardImage src={item.image} />
                   <div className="k-vbox">

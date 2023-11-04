@@ -2,7 +2,7 @@
 
 import { SingleProduct } from "./SingleProduct";
 
-const SingleProductPage = (props) => {
+const SingleProductPage = (props: any) => {
   return <SingleProduct ID={props.ID} />;
 };
 

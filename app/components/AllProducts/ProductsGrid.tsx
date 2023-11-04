@@ -84,32 +84,35 @@ export const AllProducts = () => {
 
   const cancel = (dataItem: Product) => {
     const originalItem = initialData.find((p) => p.id === dataItem.id);
-    const newData = data.map((item) =>
-      item.id === originalItem.id ? originalItem : item
-    );
+    const newData: Product[] | undefined =
+      originalItem &&
+      data.map((item) => (item.id === originalItem.id ? originalItem : item));
 
-    setDataResult(process(newData, dataState));
+    newData && setDataResult(process(newData, dataState));
   };
 
   const enterEdit = (dataItem: Product) => {
-    setDataResult(
-      process(
-        dataResult.data.map((item) =>
-          item.id === dataItem.id ? { ...item, inEdit: true } : item
-        ),
-        dataState
-      )
-    );
+    dataResult &&
+      setDataResult(
+        process(
+          dataResult.data.map((item) =>
+            item.id === dataItem.id ? { ...item, inEdit: true } : item
+          ),
+          dataState
+        )
+      );
   };
 
   const itemChange = (event: GridItemChangeEvent) => {
-    const newData = dataResult.data.map((item) =>
-      item.id === event.dataItem.id
-        ? { ...item, [event.field || ""]: event.value }
-        : item
-    );
+    const newData: any[] | undefined =
+      dataResult &&
+      dataResult.data.map((item) =>
+        item.id === event.dataItem.id
+          ? { ...item, [event.field || ""]: event.value }
+          : item
+      );
 
-    setDataResult(process(newData, dataState));
+    newData && setDataResult(process(newData, dataState));
   };
 
   const addNew = () => {
