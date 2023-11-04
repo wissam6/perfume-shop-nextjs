@@ -135,7 +135,7 @@ export const SignIn = () => {
           )}
         />
         <Hint>
-          Don't have an account?{" "}
+          Do not have an account?{" "}
           <Link style={{ marginLeft: "5px", color: "red" }} href="./signup">
             Sign Up
           </Link>

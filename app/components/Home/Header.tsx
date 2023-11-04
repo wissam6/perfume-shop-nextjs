@@ -11,8 +11,8 @@ import { Popup } from "@progress/kendo-react-popup";
 import Link from "next/link";
 import { SvgIcon } from "@progress/kendo-react-common";
 import { Button } from "@progress/kendo-react-buttons";
-
 import { loginIcon, plusCircleIcon } from "@progress/kendo-svg-icons";
+import styles from "./header.module.css";
 
 export const Header = () => {
   const [show, setShow] = React.useState<boolean>(false);
@@ -33,9 +33,9 @@ export const Header = () => {
     <React.Fragment>
       <div className="headerDiv">
         <AppBar positionMode="sticky">
-          <AppBarSection className="title">
+          <AppBarSection className={styles.title}>
             <Link href="/home">
-              <h1 className="title">Golden Perfume</h1>
+              <h1 className={styles.title}>Golden Perfume</h1>
             </Link>
           </AppBarSection>
 
@@ -102,93 +102,6 @@ export const Header = () => {
             </>
           )}
         </AppBar>
-        <style>{`
-            
-            .headerDiv .title {
-                font-size: 18px;
-                margin: 0;
-            }
-            .headerDiv .k-badge-container {
-                margin-right: 8px;
-            }
-            .headerDiv ul {
-                font-size: 14px;
-                list-style-type: none;
-                padding: 0;
-                margin: 0;
-                display: flex;
-            }
-            .headerDiv li {
-                margin: 0 9px;
-            }
-            .headerDiv li:hover {
-                cursor: pointer;
-                color: #84cef1;
-            }
-            .headerDiv .k-appbar-section {
-                display: flex;
-            }
-            .headerDiv .k-button k-button-md k-rounded-md k-button-solid k-button-solid-base {
-                padding: 0 8px;
-            }
-            .headerDiv .content li {
-                margin: 0;
-                padding: 6px 5px;
-            }
-            .headerDiv .content ul {
-                display: block;
-            }
-            .content {
-                padding: 4px 8px;
-            }
-            @media only screen and (max-width: 600px) {
-              .headerDiv  
-              .appbar-items,
-                .user-actions,
-                .k-avatar,
-                .k-appbar-separator {
-                    display: none;
-                }
-                .headerDiv
-                .overflow-button {
-                    display: block;
-                }
-                .headerDiv
-                .content ul li:last-child {
-                    display: block;
-                }
-            }
-            /* Small devices (portrait tablets and large phones, 600px and up) */
-            @media only screen and (min-width: 600px) {
-              .headerDiv  
-              .appbar-items,
-                .user-actions .k-badge-container,
-                .k-avatar,
-                .k-appbar-separator {
-                    display: none;
-                }
-                .headerDiv
-                .overflow-button {
-                    display: block;
-                }
-                .headerDiv
-                .content ul li:last-child {
-                    display: none;
-                }
-            }
-            /* Medium devices (landscape tablets, 768px and up) */
-            @media only screen and (min-width: 768px) {
-              .headerDiv  
-              .appbar-items,
-                .user-actions .k-badge-container,
-                .k-appbar-separator,
-                .k-avatar {
-                    display: block;
-                }
-            }
-            /* Large devices (laptops/desktops, 992px and up) */
-            @media only screen and (min-width: 992px) {}
-            `}</style>
       </div>
     </React.Fragment>
   );
