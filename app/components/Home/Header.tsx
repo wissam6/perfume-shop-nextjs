@@ -5,19 +5,30 @@ import {
   AppBar,
   AppBarSection,
   AppBarSpacer,
+  Avatar,
 } from "@progress/kendo-react-layout";
 import { Popup } from "@progress/kendo-react-popup";
 import Link from "next/link";
 import { SvgIcon } from "@progress/kendo-react-common";
+import { Button } from "@progress/kendo-react-buttons";
 
 import { loginIcon, plusCircleIcon } from "@progress/kendo-svg-icons";
 
 export const Header = () => {
-  const [show, setShow] = React.useState(false);
+  const [show, setShow] = React.useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState<boolean>(false);
+  const [user, setUser] = React.useState<string>();
   const anchor = React.useRef(null);
   const handleClick = () => {
     setShow(!show);
   };
+  React.useEffect(() => {
+    const userExists = localStorage.getItem("users");
+    if (userExists) {
+      setIsLoggedIn(true);
+      setUser(userExists);
+    }
+  }, []);
   return (
     <React.Fragment>
       <div className="headerDiv">
@@ -52,46 +63,44 @@ export const Header = () => {
           </AppBarSection>
 
           <AppBarSpacer />
-          <AppBarSection>
-            <Link href="./authentication/signin">
-              Sign In <SvgIcon icon={loginIcon} />
-            </Link>
-          </AppBarSection>
-          <AppBarSection>
-            <Link href="./authentication/signup">
-              Sign Up <SvgIcon icon={plusCircleIcon} />
-            </Link>
-          </AppBarSection>
-          <AppBarSection>
-            <button
-              className="k-button k-button-md k-rounded-md k-button-flat k-button-flat-base overflow-button"
-              ref={anchor}
-              onClick={handleClick}
-            >
-              <span className="k-icon k-i-menu" />
-            </button>
-            <Popup
-              anchor={anchor.current}
-              show={show}
-              style={{
-                marginLeft: -10,
-              }}
-            >
-              <div className="content">
-                <ul>
-                  <li>
-                    <span>My Profile</span>
-                  </li>
-                  <li>
-                    <span>My Orders</span>
-                  </li>
-                  <li>
-                    <span>Notifications</span>
-                  </li>
-                </ul>
-              </div>
-            </Popup>
-          </AppBarSection>
+          {!isLoggedIn && (
+            <>
+              <AppBarSection>
+                <Link href="./authentication/signin">
+                  Sign In <SvgIcon icon={loginIcon} />
+                </Link>
+              </AppBarSection>
+              <AppBarSection>
+                <Link href="./authentication/signup">
+                  Sign Up <SvgIcon icon={plusCircleIcon} />
+                </Link>
+              </AppBarSection>
+            </>
+          )}
+          {isLoggedIn && (
+            <>
+              <AppBarSection>Welcome, {user}</AppBarSection>
+              <button ref={anchor} onClick={handleClick}>
+                <Avatar rounded="full" type="text" style={{ marginRight: 5 }} />
+              </button>
+              <Popup
+                anchor={anchor.current}
+                show={show}
+                style={{ marginLeft: -10 }}
+              >
+                <div className="content">
+                  <ul>
+                    <li>
+                      <Link href="">Profile</Link>
+                    </li>
+                    <li>
+                      <Link href="">My Orders</Link>
+                    </li>
+                  </ul>
+                </div>
+              </Popup>
+            </>
+          )}
         </AppBar>
         <style>{`
             

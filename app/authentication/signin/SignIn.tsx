@@ -13,6 +13,7 @@ import { Input } from "@progress/kendo-react-inputs";
 import { Error, Hint } from "@progress/kendo-react-labels";
 import { db } from "../../firebase";
 import { collection, getDocs } from "firebase/firestore";
+import { DialogPopup } from "@/app/components/DialogPopup/DialogPopup";
 import Link from "next/link";
 const bcrypt = require("bcryptjs");
 
@@ -21,7 +22,8 @@ const emailValidator = (value: string) =>
   emailRegex.test(value) ? "" : "Please enter a valid email.";
 
 export const SignIn = () => {
-  const [loggedUser, setLoggedUser] = React.useState();
+  const [loggedUser, setLoggedUser] = React.useState<string>();
+  const [visible, setVisible] = React.useState<boolean>(false);
 
   const EmailInput = (fieldRenderProps: FieldRenderProps) => {
     const { validationMessage, visited, ...others } = fieldRenderProps;
@@ -65,7 +67,8 @@ export const SignIn = () => {
           console.log(err);
         }
         if (res) {
-          setLoggedUser(userName);
+          localStorage.setItem("users", JSON.stringify(userName));
+          //setLoggedUser(userName);
           router.push("/");
         } else {
           window.alert("incorrect password");
@@ -75,7 +78,10 @@ export const SignIn = () => {
   };
 
   React.useEffect(() => {
-    localStorage.setItem("users", JSON.stringify(loggedUser));
+    const userExists = localStorage.getItem("users");
+    if (userExists) {
+      setVisible(true);
+    }
   }, [loggedUser]);
 
   return (
@@ -135,6 +141,7 @@ export const SignIn = () => {
           </Link>
         </Hint>
       </div>
+      <DialogPopup isVisible={visible} message="You are already logged in" />
     </React.Fragment>
   );
 };
