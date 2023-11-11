@@ -12,9 +12,12 @@ import Link from "next/link";
 import { SvgIcon } from "@progress/kendo-react-common";
 import { Button } from "@progress/kendo-react-buttons";
 import { loginIcon, plusCircleIcon } from "@progress/kendo-svg-icons";
+import { useRouter } from "next/navigation";
+import { DropDownList } from "@progress/kendo-react-dropdowns";
 import styles from "./header.module.css";
 
 export const Header = () => {
+  const router = useRouter();
   const [show, setShow] = React.useState<boolean>(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState<boolean>(false);
   const [user, setUser] = React.useState<string>();
@@ -29,6 +32,10 @@ export const Header = () => {
       setUser(userExists);
     }
   }, []);
+  const logout = () => {
+    localStorage.removeItem("users");
+    router.push("./home");
+  };
   return (
     <React.Fragment>
       <div className="headerDiv">
@@ -77,6 +84,9 @@ export const Header = () => {
               </AppBarSection>
             </>
           )}
+          <AppBarSection>
+            <DropDownList defaultValue={"theme chooser"} />
+          </AppBarSection>
           {isLoggedIn && (
             <>
               <AppBarSection>Welcome, {user}</AppBarSection>
@@ -95,6 +105,9 @@ export const Header = () => {
                     </li>
                     <li>
                       <Link href="">My Orders</Link>
+                    </li>
+                    <li>
+                      <Button onClick={logout}>Logout</Button>
                     </li>
                   </ul>
                 </div>
