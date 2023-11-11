@@ -46,17 +46,17 @@ export const Header = () => {
           />
 
           <AppBarSection className="appbar-items">
-            <ul>
-              <li>
+            <ul className={styles.ulStyles}>
+              <li className={styles.liStyles}>
                 <Link href="./aboutus">About Us</Link>
               </li>
-              <li>
+              <li className={styles.liStyles}>
                 <Link href="./home#our-top-brands">Our Top Brands</Link>
               </li>
-              <li>
+              <li className={styles.liStyles}>
                 <Link href="./allproducts">All Products</Link>
               </li>
-              <li>
+              <li className={styles.liStyles}>
                 <Link href="./home#contact-us">Contact Us</Link>
               </li>
             </ul>
@@ -108,24 +108,9 @@ export const Header = () => {
         .k-badge-container {
           margin-right: 8px;
         }
-        ul {
-          font-size: 14px;
-          list-style-type: none;
-          padding: 0;
-          margin: 0;
-          display: flex;
-        }
-        li {
-          margin: 0 9px;
-        }
-        li:hover {
-          cursor: pointer;
-          color: #84cef1;
-        }
         .k-appbar-section {
           display: flex;
         }
-        
         .k-button k-button-md k-rounded-md k-button-solid k-button-solid-base {
           padding: 0 8px;
         }
@@ -135,50 +120,12 @@ export const Header = () => {
         }
         .content ul {
           display: block;
+          list-style-type: none;
+          padding: 0;
+          margin: 0;
         }
         .content {
           padding: 4px 8px;
-        }
-        @media only screen and (max-width: 600px) {
-          .appbar-items,
-          .user-actions,
-          .k-avatar,
-          .k-appbar-separator {
-            display: none;
-          }
-          .overflow-button {
-            display: block;
-          }
-          .content ul li:last-child {
-            display: block;
-          }
-        }
-        /* Small devices (portrait tablets and large phones, 600px and up) */
-        @media only screen and (min-width: 600px) {
-          .appbar-items,
-          .user-actions .k-badge-container,
-          .k-avatar,
-          .k-appbar-separator {
-            display: none;
-          }
-          .overflow-button {
-            display: block;
-          }
-          .content ul li:last-child {
-            display: none;
-          }
-        }
-        /* Medium devices (landscape tablets, 768px and up) */
-        @media only screen and (min-width: 768px) {
-          .appbar-items,
-          .user-actions .k-badge-container,
-          .k-appbar-separator,
-          .k-avatar {
-            display: block;
-          }
-        }
-        /* Large devices (laptops/desktops, 992px and up) */
-        @media only screen and (min-width: 992px) {
         }
         `}
       </style>
