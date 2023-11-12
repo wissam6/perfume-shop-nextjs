@@ -9,9 +9,11 @@ import { SvgIcon } from "@progress/kendo-react-common";
 export default function Page() {
   const [favourites, setFavourites] = React.useState([]);
   React.useEffect(() => {
-    const favouritesString: string = localStorage.getItem("fav") || "";
-    const favourites = JSON.parse(favouritesString);
-    setFavourites(favourites);
+    if (typeof window !== "undefined") {
+      const favouritesString: string = localStorage.getItem("fav") || "";
+      const favourites = JSON.parse(favouritesString);
+      setFavourites(favourites);
+    }
   }, []);
   return (
     <>
@@ -25,7 +27,13 @@ export default function Page() {
         Favourites <SvgIcon icon={heartOutlineIcon} size="xxxlarge" />
       </h3>
       {favourites.map((favourite: any) => {
-        return <HorizontalProductCard key={favourite.id} item={favourite} />;
+        return (
+          <HorizontalProductCard
+            key={favourite.id}
+            item={favourite}
+            page={"favourites"}
+          />
+        );
       })}
     </>
   );

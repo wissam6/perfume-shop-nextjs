@@ -67,7 +67,9 @@ export const SignIn = () => {
           console.log(err);
         }
         if (res) {
-          localStorage.setItem("users", JSON.stringify(userName));
+          if (typeof window !== "undefined") {
+            localStorage.setItem("users", JSON.stringify(userName));
+          }
           //setLoggedUser(userName);
           router.push("/");
         } else {
@@ -78,9 +80,11 @@ export const SignIn = () => {
   };
 
   React.useEffect(() => {
-    const userExists = localStorage.getItem("users");
-    if (userExists) {
-      setVisible(true);
+    if (typeof window !== "undefined") {
+      const userExists = localStorage.getItem("users");
+      if (userExists) {
+        setVisible(true);
+      }
     }
   }, [loggedUser]);
 

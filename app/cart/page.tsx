@@ -9,9 +9,11 @@ import { SvgIcon } from "@progress/kendo-react-common";
 export default function Page() {
   const [cart, setCart] = React.useState([]);
   React.useEffect(() => {
-    const cartString: string = localStorage.getItem("items") || "";
-    const cart = JSON.parse(cartString);
-    setCart(cart);
+    if (typeof window !== "undefined") {
+      const cartString: string = localStorage.getItem("items") || "";
+      const cart = JSON.parse(cartString);
+      setCart(cart);
+    }
   }, []);
   return (
     <>
@@ -25,7 +27,9 @@ export default function Page() {
         Cart <SvgIcon icon={cartIcon} size="xxxlarge" />
       </h3>
       {cart.map((cart: any) => {
-        return <HorizontalProductCard key={cart.id} item={cart} />;
+        return (
+          <HorizontalProductCard key={cart.id} item={cart} page={"cart"} />
+        );
       })}
     </>
   );

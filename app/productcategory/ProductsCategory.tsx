@@ -68,15 +68,17 @@ export const ProductsCategory = (props: any) => {
     event: React.MouseEvent<HTMLElement>,
     item: itemInterface
   ) => {
-    let oldItems: any = localStorage.getItem("items");
-    if (oldItems !== null) {
-      oldItems = JSON.parse(oldItems);
-      oldItems.push(item);
-      localStorage.setItem("items", JSON.stringify(oldItems));
-      window.dispatchEvent(new Event("storage"));
-    } else {
-      localStorage.setItem("items", JSON.stringify([item]));
-      window.dispatchEvent(new Event("storage"));
+    if (typeof window !== "undefined") {
+      let oldItems: any = localStorage.getItem("items");
+      if (oldItems !== null) {
+        oldItems = JSON.parse(oldItems);
+        oldItems.push(item);
+        localStorage.setItem("items", JSON.stringify(oldItems));
+        window.dispatchEvent(new Event("storage"));
+      } else {
+        localStorage.setItem("items", JSON.stringify([item]));
+        window.dispatchEvent(new Event("storage"));
+      }
     }
   };
 
@@ -84,15 +86,17 @@ export const ProductsCategory = (props: any) => {
     event: React.MouseEvent<HTMLElement>,
     item: itemInterface
   ) => {
-    let oldItems: any = localStorage.getItem("fav");
-    if (oldItems !== null) {
-      oldItems = JSON.parse(oldItems);
-      oldItems.push(item);
-      localStorage.setItem("fav", JSON.stringify(oldItems));
-      window.dispatchEvent(new Event("storage"));
-    } else {
-      localStorage.setItem("fav", JSON.stringify([item]));
-      window.dispatchEvent(new Event("storage"));
+    if (typeof window !== "undefined") {
+      let oldItems: any = localStorage.getItem("fav");
+      if (oldItems !== null) {
+        oldItems = JSON.parse(oldItems);
+        oldItems.push(item);
+        localStorage.setItem("fav", JSON.stringify(oldItems));
+        window.dispatchEvent(new Event("storage"));
+      } else {
+        localStorage.setItem("fav", JSON.stringify([item]));
+        window.dispatchEvent(new Event("storage"));
+      }
     }
   };
 

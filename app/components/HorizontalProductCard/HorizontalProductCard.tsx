@@ -14,7 +14,6 @@ import { starIcon, starOutlineIcon } from "@progress/kendo-svg-icons";
 import { SvgIcon } from "@progress/kendo-react-common";
 
 export const HorizontalProductCard = (props: any) => {
-  console.log(props.item);
   return (
     <div>
       <Card orientation="horizontal" style={{ padding: "10px" }}>
@@ -39,9 +38,15 @@ export const HorizontalProductCard = (props: any) => {
             <p>${props.item.price}</p>
           </CardBody>
           <CardActions>
-            <button className="k-button k-button-md k-rounded-md k-button-flat k-button-flat-primary">
-              Add to Cart
-            </button>
+            {props.page === "favourites" ? (
+              <button className="k-button k-button-md k-rounded-md k-button-flat k-button-flat-primary">
+                Add to Cart
+              </button>
+            ) : (
+              <button className="k-button k-button-md k-rounded-md k-button-flat k-button-flat-primary">
+                Order
+              </button>
+            )}
             <button className="k-button k-button-md k-rounded-md k-button-flat k-button-flat-primary">
               Remove
             </button>

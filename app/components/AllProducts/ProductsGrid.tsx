@@ -55,9 +55,11 @@ export const AllProducts = () => {
   const [isAdmin, setIsAdmin] = React.useState(false);
   React.useEffect(() => {
     fetchData();
-    const user = JSON.parse(localStorage.getItem("users") || "");
-    if (user === "admin") {
-      setIsAdmin(true);
+    if (typeof window !== "undefined") {
+      const user = JSON.parse(localStorage.getItem("users") || "");
+      if (user === "admin") {
+        setIsAdmin(true);
+      }
     }
   }, []);
 
