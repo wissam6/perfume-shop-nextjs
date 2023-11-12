@@ -122,26 +122,30 @@ export const Header = () => {
                 gap: 10,
               }}
             >
-              <BadgeContainer>
-                <SvgIcon icon={cartIcon} size="large" />
-                <Badge
-                  size="small"
-                  align={{ vertical: "bottom", horizontal: "end" }}
-                  cutoutBorder={true}
-                >
-                  {cartNumber}
-                </Badge>
-              </BadgeContainer>
-              <BadgeContainer>
-                <SvgIcon icon={heartIcon} size="large" />
-                <Badge
-                  size="small"
-                  align={{ vertical: "bottom", horizontal: "end" }}
-                  cutoutBorder={true}
-                >
-                  {favouritesNumber}
-                </Badge>
-              </BadgeContainer>
+              <Link href={"./cart"}>
+                <BadgeContainer>
+                  <SvgIcon icon={cartIcon} size="large" />
+                  <Badge
+                    size="small"
+                    align={{ vertical: "bottom", horizontal: "end" }}
+                    cutoutBorder={true}
+                  >
+                    {cartNumber}
+                  </Badge>
+                </BadgeContainer>
+              </Link>
+              <Link href={"./favourites"}>
+                <BadgeContainer>
+                  <SvgIcon icon={heartIcon} size="large" />
+                  <Badge
+                    size="small"
+                    align={{ vertical: "bottom", horizontal: "end" }}
+                    cutoutBorder={true}
+                  >
+                    {favouritesNumber}
+                  </Badge>
+                </BadgeContainer>
+              </Link>
             </div>
           </AppBarSection>
           <AppBarSection>

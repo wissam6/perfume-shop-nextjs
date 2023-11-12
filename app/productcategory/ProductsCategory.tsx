@@ -71,7 +71,7 @@ export const ProductsCategory = (props: any) => {
     let oldItems: any = localStorage.getItem("items");
     if (oldItems !== null) {
       oldItems = JSON.parse(oldItems);
-      oldItems.push(JSON.stringify(item));
+      oldItems.push(item);
       localStorage.setItem("items", JSON.stringify(oldItems));
       window.dispatchEvent(new Event("storage"));
     } else {
@@ -87,7 +87,7 @@ export const ProductsCategory = (props: any) => {
     let oldItems: any = localStorage.getItem("fav");
     if (oldItems !== null) {
       oldItems = JSON.parse(oldItems);
-      oldItems.push(JSON.stringify(item));
+      oldItems.push(item);
       localStorage.setItem("fav", JSON.stringify(oldItems));
       window.dispatchEvent(new Event("storage"));
     } else {
