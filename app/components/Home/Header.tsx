@@ -11,13 +11,29 @@ import { Popup } from "@progress/kendo-react-popup";
 import Link from "next/link";
 import { SvgIcon } from "@progress/kendo-react-common";
 import { Button } from "@progress/kendo-react-buttons";
-import { loginIcon, plusCircleIcon } from "@progress/kendo-svg-icons";
+import {
+  heartIcon,
+  loginIcon,
+  plusCircleIcon,
+} from "@progress/kendo-svg-icons";
 import { useRouter } from "next/navigation";
 import { DropDownList } from "@progress/kendo-react-dropdowns";
+import { Badge, BadgeContainer } from "@progress/kendo-react-indicators";
+import { cartIcon } from "@progress/kendo-svg-icons";
 import styles from "./header.module.css";
 
 export const Header = () => {
   const router = useRouter();
+  const [cartNumber, setCartNumber] = React.useState<number>(
+    localStorage.getItem("items") !== null
+      ? JSON.parse(localStorage.getItem("items") as any).length
+      : 0
+  );
+  const [favouritesNumber, setFavouritesNumber] = React.useState(
+    localStorage.getItem("fav") !== null
+      ? JSON.parse(localStorage.getItem("fav") as any).length
+      : 0
+  );
   const [show, setShow] = React.useState<boolean>(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState<boolean>(false);
   const [user, setUser] = React.useState<string>();
@@ -32,6 +48,35 @@ export const Header = () => {
       setUser(userExists);
     }
   }, []);
+
+  React.useEffect(() => {
+    const handleStorage = () => {
+      const items = localStorage.getItem("items") || "";
+      const parsedItems = JSON.parse(items);
+      if (parsedItems) {
+        if (parsedItems.length) {
+          setCartNumber(parsedItems.length);
+        }
+      }
+    };
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
+  }, []);
+
+  React.useEffect(() => {
+    const handleStorage = () => {
+      const items = localStorage.getItem("fav") || "";
+      const parsedItems = JSON.parse(items);
+      if (parsedItems) {
+        if (parsedItems.length) {
+          setFavouritesNumber(parsedItems.length);
+        }
+      }
+    };
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
+  }, []);
+
   const logout = () => {
     localStorage.removeItem("users");
     router.push("./home");
@@ -70,6 +115,38 @@ export const Header = () => {
           </AppBarSection>
 
           <AppBarSpacer />
+          <AppBarSection>
+            <div
+              style={{
+                display: "flex",
+                gap: 10,
+              }}
+            >
+              <BadgeContainer>
+                <SvgIcon icon={cartIcon} size="large" />
+                <Badge
+                  size="small"
+                  align={{ vertical: "bottom", horizontal: "end" }}
+                  cutoutBorder={true}
+                >
+                  {cartNumber}
+                </Badge>
+              </BadgeContainer>
+              <BadgeContainer>
+                <SvgIcon icon={heartIcon} size="large" />
+                <Badge
+                  size="small"
+                  align={{ vertical: "bottom", horizontal: "end" }}
+                  cutoutBorder={true}
+                >
+                  {favouritesNumber}
+                </Badge>
+              </BadgeContainer>
+            </div>
+          </AppBarSection>
+          <AppBarSection>
+            <DropDownList defaultValue={"theme chooser"} />
+          </AppBarSection>
           {!isLoggedIn && (
             <>
               <AppBarSection>
@@ -84,9 +161,6 @@ export const Header = () => {
               </AppBarSection>
             </>
           )}
-          <AppBarSection>
-            <DropDownList defaultValue={"theme chooser"} />
-          </AppBarSection>
           {isLoggedIn && (
             <>
               <AppBarSection>Welcome, {user}</AppBarSection>

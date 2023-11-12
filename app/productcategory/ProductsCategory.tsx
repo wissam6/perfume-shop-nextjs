@@ -11,6 +11,7 @@ import {
   CardSubtitle,
   Avatar,
 } from "@progress/kendo-react-layout";
+import { Button } from "@progress/kendo-react-buttons";
 import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { useRouter } from "next/navigation";
@@ -50,12 +51,50 @@ export const ProductsCategory = (props: any) => {
   };
 
   const handleCardClick = (e: React.MouseEvent<HTMLElement>, id: number) => {
-    router.push(`/singleproduct/${id}`);
+    let target = e.target as any;
+    if (
+      target.className !== "k-button-text" &&
+      target.className !== "k-button"
+    ) {
+      router.push(`/singleproduct/${id}`);
+    }
   };
 
   React.useEffect(() => {
     fetchData();
   }, []);
+
+  const addToCart = (
+    event: React.MouseEvent<HTMLElement>,
+    item: itemInterface
+  ) => {
+    let oldItems: any = localStorage.getItem("items");
+    if (oldItems !== null) {
+      oldItems = JSON.parse(oldItems);
+      oldItems.push(JSON.stringify(item));
+      localStorage.setItem("items", JSON.stringify(oldItems));
+      window.dispatchEvent(new Event("storage"));
+    } else {
+      localStorage.setItem("items", JSON.stringify([item]));
+      window.dispatchEvent(new Event("storage"));
+    }
+  };
+
+  const addToFavourites = (
+    event: React.MouseEvent<HTMLElement>,
+    item: itemInterface
+  ) => {
+    let oldItems: any = localStorage.getItem("fav");
+    if (oldItems !== null) {
+      oldItems = JSON.parse(oldItems);
+      oldItems.push(JSON.stringify(item));
+      localStorage.setItem("fav", JSON.stringify(oldItems));
+      window.dispatchEvent(new Event("storage"));
+    } else {
+      localStorage.setItem("fav", JSON.stringify([item]));
+      window.dispatchEvent(new Event("storage"));
+    }
+  };
 
   return (
     <React.Fragment>
@@ -123,12 +162,18 @@ export const ProductsCategory = (props: any) => {
                       </ul>
                     </CardBody>
                     <CardActions>
-                      <button className="k-button k-button-md k-rounded-md k-button-flat k-button-flat-primary">
+                      <Button
+                        onClick={(e) => addToCart(e, item)}
+                        className="k-button k-button-md k-rounded-md k-button-flat k-button-flat-primary"
+                      >
                         Add to Cart
-                      </button>
-                      <button className="k-button k-button-md k-rounded-md k-button-flat k-button-flat-primary">
+                      </Button>
+                      <Button
+                        onClick={(e) => addToFavourites(e, item)}
+                        className="k-button k-button-md k-rounded-md k-button-flat k-button-flat-primary"
+                      >
                         Favorite
-                      </button>
+                      </Button>
                     </CardActions>
                   </div>
                 </Card>
