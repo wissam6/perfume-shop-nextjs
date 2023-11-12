@@ -52,9 +52,13 @@ export const AllProducts = () => {
   };
 
   const [dataResult, setDataResult] = React.useState<DataResult>();
-
+  const [isAdmin, setIsAdmin] = React.useState(false);
   React.useEffect(() => {
     fetchData();
+    const user = JSON.parse(localStorage.getItem("users") || "");
+    if (user === "admin") {
+      setIsAdmin(true);
+    }
   }, []);
 
   // modify the data in the store, db etc
@@ -191,9 +195,11 @@ export const AllProducts = () => {
             <Button themeColor="primary">
               <Link href="./home">Back to Home</Link>
             </Button>
-            <Button title="Add new" themeColor="primary" onClick={addNew}>
-              Add new
-            </Button>
+            {isAdmin ?? (
+              <Button title="Add new" themeColor="primary" onClick={addNew}>
+                Add new
+              </Button>
+            )}
             <Button
               title="Export Excel"
               themeColor="primary"
@@ -220,7 +226,9 @@ export const AllProducts = () => {
           <Column field="rating" title="Rating" editor="numeric" />
           <Column field="sale" title="Sale" editor="numeric" />
           <Column field="price" title="Price" editor="numeric" />
-          <Column cell={CommandCell} width="200px" filterable={false} />
+          {isAdmin ?? (
+            <Column cell={CommandCell} width="200px" filterable={false} />
+          )}
         </MyGrid>
       </div>
     </ExcelExport>

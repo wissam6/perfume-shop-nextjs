@@ -26,6 +26,7 @@
     "@progress/kendo-react-intl": "^5.17.0",
     "@progress/kendo-react-labels": "^5.15.0",
     "@progress/kendo-react-layout": "^5.15.0",
+    "@progress/kendo-react-pdf": "^6.1.0",
     "@progress/kendo-react-popup": "^5.15.0",
     "@progress/kendo-react-progressbars": "^5.17.0",
     "@progress/kendo-react-scrollview": "^5.16.1",
