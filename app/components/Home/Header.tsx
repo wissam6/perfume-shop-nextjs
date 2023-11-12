@@ -179,7 +179,7 @@ export const Header = () => {
                 <div className="content">
                   <ul>
                     <li>
-                      <Link href="">Profile</Link>
+                      <Link href="/profile">Profile</Link>
                     </li>
                     <li>
                       <Link href="">My Orders</Link>
