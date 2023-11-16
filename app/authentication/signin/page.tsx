@@ -1,4 +1,3 @@
-"use client";
 import * as React from "react";
 import { SignIn } from "./SignIn";
 import { BackToHome } from "../../components/BackToHome/BackToHome";

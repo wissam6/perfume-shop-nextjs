@@ -1,4 +1,3 @@
-"use client";
 import { SignUp } from "./SignUp";
 import { BackToHome } from "../../components/BackToHome/BackToHome";
 

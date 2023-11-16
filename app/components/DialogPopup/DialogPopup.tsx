@@ -1,7 +1,7 @@
+"use client";
 import * as React from "react";
 import {
   Dialog,
-  DialogActionsBar,
   DialogProps,
   DialogCloseEvent,
 } from "@progress/kendo-react-dialogs";

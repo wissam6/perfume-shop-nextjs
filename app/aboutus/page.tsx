@@ -1,4 +1,3 @@
-"use client";
 import { BackToHome } from "../components/BackToHome/BackToHome";
 export default function Page() {
   return (
