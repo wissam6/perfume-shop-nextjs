@@ -4,6 +4,7 @@ import { BackToHome } from "../../components/BackToHome/BackToHome";
 import { db } from "../../firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 const bcrypt = require("bcryptjs");
 
 export default async function Page() {
@@ -28,9 +29,7 @@ export default async function Page() {
     } else {
       const isPassEqual = await bcrypt.compare(password, hashPassword);
       if (isPassEqual) {
-        if (typeof window !== "undefined") {
-          localStorage.setItem("users", JSON.stringify(userName));
-        }
+        cookies().set("users", JSON.stringify(userName));
         redirect("/");
       } else {
         console.log("incorrect password");
