@@ -1,5 +1,5 @@
 "use client";
-import { useRouter } from "next/navigation";
+
 import * as React from "react";
 import {
   Form,
@@ -11,18 +11,12 @@ import {
 } from "@progress/kendo-react-form";
 import { Input } from "@progress/kendo-react-inputs";
 import { Error, Hint } from "@progress/kendo-react-labels";
-import { db } from "../../firebase";
-import { collection, getDocs } from "firebase/firestore";
 import { DialogPopup } from "@/app/components/DialogPopup/DialogPopup";
 import Link from "next/link";
-const bcrypt = require("bcryptjs");
 
 const emailRegex: RegExp = new RegExp(/\S+@\S+\.\S+/);
-const emailValidator = (value: string) =>
-  emailRegex.test(value) ? "" : "Please enter a valid email.";
 
-export const SignIn = () => {
-  const [loggedUser, setLoggedUser] = React.useState<string>();
+export const SignIn = (props: any) => {
   const [visible, setVisible] = React.useState<boolean>(false);
 
   const EmailInput = (fieldRenderProps: FieldRenderProps) => {
@@ -35,7 +29,6 @@ export const SignIn = () => {
     );
   };
 
-  const router = useRouter();
   interface submitProps {
     email: string;
     password: string;
@@ -45,38 +38,7 @@ export const SignIn = () => {
   };
 
   const submit = async (email: string, password: string) => {
-    let emailExists = false;
-    let hashPassword;
-    let userName: any;
-
-    const querySnapshot = await getDocs(collection(db, "users"));
-
-    querySnapshot.forEach((doc) => {
-      if (doc.data().email === email) {
-        emailExists = true;
-        hashPassword = doc.data().password;
-        userName = doc.data().userName;
-      }
-    });
-
-    if (!emailExists) {
-      window.alert("incorrect email");
-    } else {
-      bcrypt.compare(password, hashPassword, function (err: any, res: any) {
-        if (err) {
-          console.log(err);
-        }
-        if (res) {
-          if (typeof window !== "undefined") {
-            localStorage.setItem("users", JSON.stringify(userName));
-          }
-          //setLoggedUser(userName);
-          router.push("/");
-        } else {
-          window.alert("incorrect password");
-        }
-      });
-    }
+    props.formAction(email, password);
   };
 
   React.useEffect(() => {
@@ -86,7 +48,7 @@ export const SignIn = () => {
         setVisible(true);
       }
     }
-  }, [loggedUser]);
+  }, []);
 
   return (
     <React.Fragment>
