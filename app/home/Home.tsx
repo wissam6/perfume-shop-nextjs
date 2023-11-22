@@ -1,7 +1,7 @@
 import "server-only";
 
 import * as React from "react";
-import { Categories } from "../components/Home/Categories";
+import { Categories } from "../components/Home/Categories/Categories";
 import { OnSale } from "../components/Home/OnSale/OnSale";
 import { Footer } from "../components/Footer/Footer";
 import styles from "./home.module.css";

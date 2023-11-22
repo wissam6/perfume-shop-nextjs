@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Header } from "../components/Home/Header";
+import { Header } from "../components/Header/HeaderClient";
 import { Footer } from "../components/Footer/Footer";
 export default function RootLayout({
   children,

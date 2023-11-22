@@ -22,7 +22,8 @@ import { Badge, BadgeContainer } from "@progress/kendo-react-indicators";
 import { cartIcon } from "@progress/kendo-svg-icons";
 import styles from "./header.module.css";
 
-export const Header = () => {
+export const Header = (props: any) => {
+  const userInfo = JSON.parse(props.user.value);
   const router = useRouter();
   const [cartNumber, setCartNumber] = React.useState<number>(
     localStorage.getItem("items") !== null
@@ -151,7 +152,7 @@ export const Header = () => {
           <AppBarSection>
             <DropDownList defaultValue={"theme chooser"} />
           </AppBarSection>
-          {!isLoggedIn && (
+          {!userInfo && (
             <>
               <AppBarSection>
                 <Link href="./authentication/signin">
@@ -165,9 +166,9 @@ export const Header = () => {
               </AppBarSection>
             </>
           )}
-          {isLoggedIn && (
+          {userInfo && (
             <>
-              <AppBarSection>Welcome, {user}</AppBarSection>
+              <AppBarSection>Welcome, {userInfo.username}</AppBarSection>
               <button ref={anchor} onClick={handleClick}>
                 <Avatar rounded="full" type="text" style={{ marginRight: 5 }} />
               </button>

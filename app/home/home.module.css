@@ -45,3 +45,7 @@
     position: relative;
   }
 }
+
+.title {
+  padding-left: 20px;
+}

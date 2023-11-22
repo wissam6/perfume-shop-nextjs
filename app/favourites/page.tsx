@@ -1,6 +1,6 @@
 "use client";
 import { HorizontalProductCard } from "../components/HorizontalProductCard/HorizontalProductCard";
-import { Header } from "../components/Home/Header";
+import { Header } from "../components/Header/HeaderClient";
 
 import * as React from "react";
 import { heartOutlineIcon } from "@progress/kendo-svg-icons";

@@ -7,7 +7,7 @@ import {
   BottomNavigationSelectEvent,
   BottomNavigationItemProps,
 } from "@progress/kendo-react-layout";
-import { Header } from "../components/Home/Header";
+import { Header } from "../components/Header/HeaderClient";
 
 const items: BottomNavigationItemProps[] = [
   {

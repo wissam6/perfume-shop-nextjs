@@ -29,7 +29,11 @@ export default async function Page() {
     } else {
       const isPassEqual = await bcrypt.compare(password, hashPassword);
       if (isPassEqual) {
-        cookies().set("users", JSON.stringify(userName));
+        const userInfo = {
+          username: userName,
+          email: email,
+        };
+        cookies().set("user", JSON.stringify(userInfo));
         redirect("/");
       } else {
         console.log("incorrect password");
