@@ -2,7 +2,6 @@ import * as React from "react";
 import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { SingleProductCard } from "./single-product-card";
-import { SingleProductSkeleton } from "./single-product-skeleton";
 
 export const SingleProduct = async (props: any) => {
   let item;
@@ -36,9 +35,5 @@ export const SingleProduct = async (props: any) => {
     stock: stock,
     sizes: sizes,
   };
-  return (
-    <React.Suspense fallback={<SingleProductSkeleton />}>
-      <SingleProductCard data={data} />
-    </React.Suspense>
-  );
+  return <SingleProductCard data={data} />;
 };
