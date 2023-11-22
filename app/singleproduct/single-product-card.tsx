@@ -20,7 +20,7 @@ import {
 import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
 
-export const SingleProductCard = async (props: any) => {
+export const SingleProductCard = (props: any) => {
   const data = props.data;
   const [price, setPrice] = React.useState(data.price);
   const [rating, setRating] = React.useState(data.rating);
