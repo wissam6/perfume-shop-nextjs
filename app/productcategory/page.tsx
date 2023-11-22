@@ -1,7 +1,7 @@
 "use client";
 
 import { ProductsCategory } from "./ProductsCategory";
-import { useSearchParams } from "next/navigation";
+//import { useSearchParams } from "next/navigation";
 
 const product = "versace";
 
