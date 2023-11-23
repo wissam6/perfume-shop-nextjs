@@ -1,6 +1,6 @@
 "use client";
 
-import { ProductsCategory } from "./ProductsCategory";
+import { ProductsCategory } from "./product-category";
 //import { useSearchParams } from "next/navigation";
 
 const product = "versace";

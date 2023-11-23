@@ -12,8 +12,6 @@ import {
   Avatar,
 } from "@progress/kendo-react-layout";
 import { Button } from "@progress/kendo-react-buttons";
-import { db } from "../firebase";
-import { collection, getDocs } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 
 interface itemInterface {
@@ -31,24 +29,10 @@ interface itemInterface {
   type?: string;
 }
 
-export const ProductsCategory = (props: any) => {
+export const ProductsCategoryClient = (props: any) => {
+  const data = props.data;
   const router = useRouter();
   const product = props.product;
-  const [data, setData] = React.useState<itemInterface[]>([]);
-  const fetchData = async () => {
-    //to be replaced by fetching only the needed category
-    let products: any = [];
-    const querySnapshot = await getDocs(collection(db, "perfumes"));
-    querySnapshot.forEach((doc) => {
-      let docData = doc.data();
-      docData.id = doc.id;
-      if (docData.brand.toLowerCase() === product) {
-        products = [...products, docData];
-      }
-    });
-    console.log(products);
-    setData(products);
-  };
 
   const handleCardClick = (e: React.MouseEvent<HTMLElement>, id: number) => {
     let target = e.target as any;
@@ -59,10 +43,6 @@ export const ProductsCategory = (props: any) => {
       router.push(`/singleproduct/${id}`);
     }
   };
-
-  React.useEffect(() => {
-    fetchData();
-  }, []);
 
   const addToCart = (
     event: React.MouseEvent<HTMLElement>,
@@ -133,7 +113,7 @@ export const ProductsCategory = (props: any) => {
             },
           ]}
         >
-          {data.map((item: any, index) => {
+          {data.map((item: any, index: number) => {
             return (
               <GridLayoutItem key={item.id}>
                 <Card
