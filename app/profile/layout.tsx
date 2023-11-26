@@ -7,7 +7,7 @@ import {
   BottomNavigationSelectEvent,
   BottomNavigationItemProps,
 } from "@progress/kendo-react-layout";
-import { HeaderServer } from "../components/Header/HeaderServer";
+/* import { HeaderServer } from "../components/Header/HeaderServer"; */
 
 const items: BottomNavigationItemProps[] = [
   {
@@ -55,7 +55,7 @@ export default function BottomNavLayout({
 
   return (
     <>
-      <HeaderServer />
+      {/* <HeaderServer /> */}
       <div className={"example-wrapper"}>
         <div className={"page"}>
           <div className={"content"}>{children}</div>
