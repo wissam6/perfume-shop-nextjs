@@ -1,6 +1,6 @@
 "use client";
 import { HorizontalProductCard } from "../components/HorizontalProductCard/HorizontalProductCard";
-import { Header } from "../components/Header/HeaderClient";
+import { HeaderServer } from "../components/Header/HeaderServer";
 
 import * as React from "react";
 import { cartIcon } from "@progress/kendo-svg-icons";
@@ -17,7 +17,7 @@ export default function Page() {
   }, []);
   return (
     <>
-      <Header />
+      <HeaderServer />
       <h3
         style={{
           margin: "20px",
