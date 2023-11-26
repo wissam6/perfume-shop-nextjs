@@ -5,6 +5,7 @@ import { ScrollView } from "@progress/kendo-react-scrollview";
 import Image from "next/image";
 import { db } from "../../../firebase";
 import { collection, getDocs } from "firebase/firestore";
+import { Badge, BadgeContainer } from "@progress/kendo-react-indicators";
 import styles from "./onsale.module.css";
 
 interface itemInterface {
@@ -35,7 +36,7 @@ export const OnSale = () => {
     const highestSale = products.sort(
       (a: any, b: any) => parseFloat(b.sale) - parseFloat(a.sale)
     );
-    setData(highestSale.slice(0, 4));
+    setData(highestSale.slice(0, 2));
   };
 
   React.useEffect(() => {
@@ -63,6 +64,8 @@ export const OnSale = () => {
             className={styles.scrollview}
             automaticViewChange={true}
             automaticViewChangeInterval={2000}
+            endless={true}
+            arrows={false}
           >
             {data.map((item: itemInterface, index) => {
               let newPrice: number = item.price * (item.sale / 100);
@@ -71,16 +74,14 @@ export const OnSale = () => {
                 <div key={index}>
                   <h3
                     style={{
-                      paddingLeft: "10px",
+                      paddingLeft: "15px",
                       position: "absolute",
                     }}
                   >
-                    <div>
-                      <span>
-                        Previous Price: <del>${item.price}</del>
-                      </span>
-                    </div>
-                    <div>New Price: {newPrice}</div>
+                    <span style={{ color: "grey" }}>
+                      <del>$ {item.price} USD</del>
+                    </span>
+                    <span> </span>$ {newPrice} USD
                   </h3>
                   <Image
                     src={item.image}

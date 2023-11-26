@@ -76,7 +76,7 @@ export const Header = (props: any) => {
 
   const logout = () => {
     localStorage.removeItem("users");
-    router.push("./home");
+    router.push("/home");
   };
   return (
     <React.Fragment>
@@ -84,33 +84,38 @@ export const Header = (props: any) => {
         <AppBar positionMode="sticky">
           <AppBarSection className={styles.title}>
             <Link href="/home">
-              <h1 className={styles.title}>Golden Perfume</h1>
+              <h1 className={styles.title}>
+                <span style={{ color: "#ffd700" }}>Golden</span> Perfume
+              </h1>
             </Link>
           </AppBarSection>
-
+          <img
+            src="perfume.svg"
+            alt="My Happy SVG"
+            width="50px"
+            height="50px"
+          />
           <AppBarSpacer
             style={{
               width: 32,
             }}
           />
-
           <AppBarSection className="appbar-items">
             <ul className={styles.ulStyles}>
               <li className={styles.liStyles}>
-                <Link href="./aboutus">About Us</Link>
+                <Link href="/aboutus">About Us</Link>
               </li>
               <li className={styles.liStyles}>
-                <Link href="./home#our-top-brands">Our Top Brands</Link>
+                <Link href="/home#our-top-brands">Our Top Brands</Link>
               </li>
               <li className={styles.liStyles}>
-                <Link href="./allproducts">All Products</Link>
+                <Link href="/allproducts">All Products</Link>
               </li>
               <li className={styles.liStyles}>
-                <Link href="./home#contact-us">Contact Us</Link>
+                <Link href="/home#contact-us">Contact Us</Link>
               </li>
             </ul>
           </AppBarSection>
-
           <AppBarSpacer />
           <AppBarSection>
             <div
@@ -151,12 +156,12 @@ export const Header = (props: any) => {
           {!userInfo && (
             <>
               <AppBarSection>
-                <Link href="./authentication/signin">
+                <Link href="/authentication/signin">
                   Sign In <SvgIcon icon={loginIcon} />
                 </Link>
               </AppBarSection>
               <AppBarSection>
-                <Link href="./authentication/signup">
+                <Link href="/authentication/signup">
                   Sign Up <SvgIcon icon={plusCircleIcon} />
                 </Link>
               </AppBarSection>

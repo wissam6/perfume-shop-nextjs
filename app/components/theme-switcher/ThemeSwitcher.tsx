@@ -154,7 +154,7 @@ export const ThemeSwitcher = ({ theme, onThemeChange }: any) => {
         defaultValue={{
           swatch: "default/default-main",
           theme: "default",
-          text: "Theme Switcher",
+          text: "Change Theme",
         }}
         value={value}
       />

@@ -9,7 +9,7 @@ export const Footer = () => {
           bottom: 0,
           height: "100%",
           width: "100%",
-          backgroundColor: "rgb(32, 37, 108)",
+          backgroundColor: "#ebebeb",
           display: "flex",
           flexWrap: "wrap",
           position: "relative",
