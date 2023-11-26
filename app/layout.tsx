@@ -1,6 +1,10 @@
 import "./globals.css";
 import { Roboto } from "next/font/google";
-const roboto = Roboto({ subsets: ["latin"], weight: ["400"] });
+const roboto = Roboto({
+  weight: "300",
+  style: "normal",
+  subsets: ["latin"],
+});
 //import "@progress/kendo-theme-default/dist/all.css";
 
 export const metadata = {
