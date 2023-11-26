@@ -12,6 +12,7 @@ import {
 import { Input } from "@progress/kendo-react-inputs";
 import { Error, Hint } from "@progress/kendo-react-labels";
 import { DialogPopup } from "@/app/components/DialogPopup/DialogPopup";
+import { signinAction } from "../actions/authentication-actions";
 import Link from "next/link";
 
 const emailRegex: RegExp = new RegExp(/\S+@\S+\.\S+/);
@@ -38,7 +39,7 @@ export const SignIn = (props: any) => {
   };
 
   const submit = async (email: string, password: string) => {
-    props.formAction(email, password);
+    signinAction(email, password);
   };
 
   React.useEffect(() => {

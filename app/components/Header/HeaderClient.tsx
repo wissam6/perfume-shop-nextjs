@@ -119,7 +119,7 @@ export const Header = (props: any) => {
                 gap: 10,
               }}
             >
-              <Link href={"./cart"}>
+              <Link href={"/cart"} as="/cart">
                 <BadgeContainer>
                   <SvgIcon icon={cartIcon} size="large" />
                   <Badge
@@ -131,7 +131,7 @@ export const Header = (props: any) => {
                   </Badge>
                 </BadgeContainer>
               </Link>
-              <Link href={"./favourites"}>
+              <Link href={"/favourites"} as="/favourites">
                 <BadgeContainer>
                   <SvgIcon icon={heartIcon} size="large" />
                   <Badge
