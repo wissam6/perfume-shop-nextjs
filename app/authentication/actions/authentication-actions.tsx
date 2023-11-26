@@ -7,7 +7,6 @@ import { cookies } from "next/headers";
 const bcrypt = require("bcryptjs");
 
 export const signinAction = async (email: string, password: string) => {
-  "use server";
   let emailExists = false;
   let hashPassword;
   let userName: any;

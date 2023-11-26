@@ -21,6 +21,7 @@ import { Badge, BadgeContainer } from "@progress/kendo-react-indicators";
 import { cartIcon } from "@progress/kendo-svg-icons";
 import { ThemeSwitcher } from "../theme-switcher/ThemeSwitcher";
 import styles from "./header.module.css";
+import Image from "next/image";
 
 export const Header = (props: any) => {
   const userInfo = props.user && JSON.parse(props.user.value);
@@ -89,12 +90,7 @@ export const Header = (props: any) => {
               </h1>
             </Link>
           </AppBarSection>
-          <img
-            src="perfume.svg"
-            alt="My Happy SVG"
-            width="50px"
-            height="50px"
-          />
+          <Image src="perfume.svg" alt="My Happy SVG" width={50} height={50} />
           <AppBarSpacer
             style={{
               width: 32,
