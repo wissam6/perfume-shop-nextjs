@@ -7,9 +7,5 @@ import { ProductLoader } from "../products-loader";
 export default function Page({ params }: { params: { id: string } }) {
   const product = params.id.toLowerCase();
 
-  return (
-    <React.Suspense fallback={<ProductLoader />}>
-      <ProductsCategory product={product} />{" "}
-    </React.Suspense>
-  );
+  return <ProductsCategory product={product} />;
 }
