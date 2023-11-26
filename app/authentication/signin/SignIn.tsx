@@ -7,7 +7,6 @@ import {
   FormElement,
   FieldRenderProps,
   FormRenderProps,
-  FieldWrapper,
 } from "@progress/kendo-react-form";
 import { Input } from "@progress/kendo-react-inputs";
 import { Error, Hint } from "@progress/kendo-react-labels";
