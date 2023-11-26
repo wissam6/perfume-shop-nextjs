@@ -15,6 +15,7 @@ import {
   heartIcon,
   loginIcon,
   plusCircleIcon,
+  userIcon,
 } from "@progress/kendo-svg-icons";
 import { useRouter } from "next/navigation";
 import { Badge, BadgeContainer } from "@progress/kendo-react-indicators";
@@ -167,7 +168,9 @@ export const Header = (props: any) => {
             <>
               <AppBarSection>Welcome, {userInfo.username}</AppBarSection>
               <button ref={anchor} onClick={handleClick}>
-                <Avatar rounded="full" type="text" style={{ marginRight: 5 }} />
+                <Avatar rounded="full" type="text" style={{ marginRight: 5 }}>
+                  <SvgIcon icon={userIcon} />
+                </Avatar>
               </button>
               <Popup
                 anchor={anchor.current}
