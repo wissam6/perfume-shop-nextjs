@@ -25,32 +25,28 @@ import styles from "./header.module.css";
 export const Header = (props: any) => {
   const userInfo = JSON.parse(props.user.value);
   const router = useRouter();
-  const [cartNumber, setCartNumber] = React.useState<number>(
-    localStorage.getItem("items") !== null
-      ? JSON.parse(localStorage.getItem("items") as any).length
-      : 0
-  );
-  const [favouritesNumber, setFavouritesNumber] = React.useState(
-    localStorage.getItem("fav") !== null
-      ? JSON.parse(localStorage.getItem("fav") as any).length
-      : 0
-  );
+  const [cartNumber, setCartNumber] = React.useState<number>();
+  const [favouritesNumber, setFavouritesNumber] = React.useState();
   const [show, setShow] = React.useState<boolean>(false);
-  const [isLoggedIn, setIsLoggedIn] = React.useState<boolean>(false);
-  const [user, setUser] = React.useState<string>();
   const anchor = React.useRef(null);
   const handleClick = () => {
     setShow(!show);
   };
-  React.useEffect(() => {
-    const userExists = localStorage.getItem("users");
-    if (userExists) {
-      setIsLoggedIn(true);
-      setUser(userExists);
-    }
-  }, []);
 
   React.useEffect(() => {
+    if (typeof window !== undefined) {
+      const cartNumber =
+        localStorage.getItem("items") !== null
+          ? JSON.parse(localStorage.getItem("items") as any).length
+          : 0;
+      setCartNumber(cartNumber);
+      const favouritesNumber =
+        localStorage.getItem("fav") !== null
+          ? JSON.parse(localStorage.getItem("fav") as any).length
+          : 0;
+      setFavouritesNumber(favouritesNumber);
+    }
+
     const handleStorage = () => {
       const items = localStorage.getItem("items") || "";
       const parsedItems = JSON.parse(items);

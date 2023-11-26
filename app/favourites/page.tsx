@@ -10,9 +10,9 @@ export default function Page() {
   const [favourites, setFavourites] = React.useState([]);
   React.useEffect(() => {
     if (typeof window !== "undefined") {
-      const favouritesString: string = localStorage.getItem("fav") || "";
-      const favourites = JSON.parse(favouritesString);
-      setFavourites(favourites);
+      const favouritesArray =
+        JSON.parse(localStorage.getItem("fav") as string) || "";
+      setFavourites(favouritesArray);
     }
   }, []);
   return (
@@ -26,15 +26,16 @@ export default function Page() {
       >
         Favourites <SvgIcon icon={heartOutlineIcon} size="xxxlarge" />
       </h3>
-      {favourites.map((favourite: any) => {
-        return (
-          <HorizontalProductCard
-            key={favourite.id}
-            item={favourite}
-            page={"favourites"}
-          />
-        );
-      })}
+      {favourites &&
+        favourites.map((favourite: any) => {
+          return (
+            <HorizontalProductCard
+              key={favourite.id}
+              item={favourite}
+              page={"favourites"}
+            />
+          );
+        })}
     </>
   );
 }
