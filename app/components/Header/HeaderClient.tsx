@@ -23,7 +23,7 @@ import { cartIcon } from "@progress/kendo-svg-icons";
 import styles from "./header.module.css";
 
 export const Header = (props: any) => {
-  const userInfo = JSON.parse(props.user.value);
+  const userInfo = props.user && JSON.parse(props.user.value);
   const router = useRouter();
   const [cartNumber, setCartNumber] = React.useState<number>();
   const [favouritesNumber, setFavouritesNumber] = React.useState();
