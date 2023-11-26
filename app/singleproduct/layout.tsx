@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Header } from "../components/Home/Header";
+import { HeaderServer } from "../components/Header/HeaderServer";
 import { Footer } from "../components/Footer/Footer";
 export default function RootLayout({
   children,
@@ -8,7 +8,7 @@ export default function RootLayout({
 }) {
   return (
     <React.Fragment>
-      <Header />
+      <HeaderServer />
       {children}
       <Footer />
     </React.Fragment>

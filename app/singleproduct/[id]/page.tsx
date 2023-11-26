@@ -1,9 +1,12 @@
-"use client";
-
+import * as React from "react";
 import SingleProductPage from "../page";
+import { SingleProductSkeleton } from "./../single-product-skeleton";
 
 export default function Page({ params }: { params: { id: string } }) {
   const ID = params.id.toLowerCase();
-  console.log(ID);
-  return <SingleProductPage ID={ID} />;
+  return (
+    <React.Suspense fallback={<SingleProductSkeleton />}>
+      <SingleProductPage ID={ID} />;
+    </React.Suspense>
+  );
 }

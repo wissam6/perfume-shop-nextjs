@@ -1,13 +1,11 @@
-'use client';
-
 import * as React from "react";
 import { Home } from "./home/Home";
-import { Header } from "./components/Home/Header";
+import { HeaderServer } from "./components/Header/HeaderServer";
 export default function Page() {
   return (
     <React.Fragment>
-      <Header/>
-      <Home/>
+      <HeaderServer />
+      <Home />
     </React.Fragment>
   );
 }

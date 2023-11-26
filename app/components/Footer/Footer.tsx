@@ -9,7 +9,7 @@ export const Footer = () => {
           bottom: 0,
           height: "100%",
           width: "100%",
-          backgroundColor: "lightgrey",
+          backgroundColor: "rgb(32, 37, 108)",
           display: "flex",
           flexWrap: "wrap",
           position: "relative",
@@ -40,7 +40,7 @@ export const Footer = () => {
       </div>
       <hr style={{ width: "90%" }} />
       <p style={{ paddingLeft: "5%", fontSize: "14px" }}>
-        &copy; Golden Perfume 2023
+        &copy; Golden Perfume 2024 | by Wissam Merhi
       </p>
     </React.Fragment>
   );

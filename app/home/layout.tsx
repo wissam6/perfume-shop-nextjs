@@ -1,10 +1,10 @@
-import { Header } from "../components/Home/Header";
+import { HeaderServer } from "../components/Header/HeaderServer";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <Header />
+        <HeaderServer />
         {children}
       </body>
     </html>

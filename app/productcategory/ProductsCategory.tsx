@@ -11,36 +11,74 @@ import {
   CardSubtitle,
   Avatar,
 } from "@progress/kendo-react-layout";
-import { db } from "../firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { Button } from "@progress/kendo-react-buttons";
 import { useRouter } from "next/navigation";
 
-export const ProductsCategory = (props) => {
+interface itemInterface {
+  id?: number;
+  brand?: string;
+  country?: string;
+  image?: string;
+  name?: string;
+  price?: number;
+  rating?: number;
+  sale?: number;
+  sex?: string;
+  size?: number;
+  stock?: number;
+  type?: string;
+}
+
+export const ProductsCategoryClient = (props: any) => {
+  const data = props.data;
   const router = useRouter();
   const product = props.product;
-  const [data, setData] = React.useState([]);
-  const fetchData = async () => {
-    //to be replaced by fetching only the needed category
-    let products: any = [];
-    const querySnapshot = await getDocs(collection(db, "perfumes"));
-    querySnapshot.forEach((doc) => {
-      let docData = doc.data();
-      docData.id = doc.id;
-      if (docData.brand.toLowerCase() === product) {
-        products = [...products, docData];
+
+  const handleCardClick = (e: React.MouseEvent<HTMLElement>, id: number) => {
+    let target = e.target as any;
+    if (
+      target.className !== "k-button-text" &&
+      target.className !== "k-button"
+    ) {
+      router.push(`/singleproduct/${id}`);
+    }
+  };
+
+  const addToCart = (
+    event: React.MouseEvent<HTMLElement>,
+    item: itemInterface
+  ) => {
+    if (typeof window !== "undefined") {
+      let oldItems: any = localStorage.getItem("items");
+      if (oldItems !== null) {
+        oldItems = JSON.parse(oldItems);
+        oldItems.push(item);
+        localStorage.setItem("items", JSON.stringify(oldItems));
+        window.dispatchEvent(new Event("storage"));
+      } else {
+        localStorage.setItem("items", JSON.stringify([item]));
+        window.dispatchEvent(new Event("storage"));
       }
-    });
-    console.log(products);
-    setData(products);
+    }
   };
 
-  const handleCardClick = (e, id) => {
-    router.push(`/singleproduct/${id}`);
+  const addToFavourites = (
+    event: React.MouseEvent<HTMLElement>,
+    item: itemInterface
+  ) => {
+    if (typeof window !== "undefined") {
+      let oldItems: any = localStorage.getItem("fav");
+      if (oldItems !== null) {
+        oldItems = JSON.parse(oldItems);
+        oldItems.push(item);
+        localStorage.setItem("fav", JSON.stringify(oldItems));
+        window.dispatchEvent(new Event("storage"));
+      } else {
+        localStorage.setItem("fav", JSON.stringify([item]));
+        window.dispatchEvent(new Event("storage"));
+      }
+    }
   };
-
-  React.useEffect(() => {
-    fetchData();
-  }, []);
 
   return (
     <React.Fragment>
@@ -75,7 +113,7 @@ export const ProductsCategory = (props) => {
             },
           ]}
         >
-          {data.map((item, index) => {
+          {data.map((item: any, index: number) => {
             return (
               <GridLayoutItem key={item.id}>
                 <Card
@@ -83,7 +121,9 @@ export const ProductsCategory = (props) => {
                   style={{
                     height: "300px",
                   }}
-                  onClick={(e) => handleCardClick(e, item.id)}
+                  onClick={(e: React.MouseEvent<HTMLElement>) =>
+                    handleCardClick(e, item.id)
+                  }
                 >
                   <CardImage src={item.image} />
                   <div className="k-vbox">
@@ -106,12 +146,18 @@ export const ProductsCategory = (props) => {
                       </ul>
                     </CardBody>
                     <CardActions>
-                      <button className="k-button k-button-md k-rounded-md k-button-flat k-button-flat-primary">
+                      <Button
+                        onClick={(e) => addToCart(e, item)}
+                        className="k-button k-button-md k-rounded-md k-button-flat k-button-flat-primary"
+                      >
                         Add to Cart
-                      </button>
-                      <button className="k-button k-button-md k-rounded-md k-button-flat k-button-flat-primary">
+                      </Button>
+                      <Button
+                        onClick={(e) => addToFavourites(e, item)}
+                        className="k-button k-button-md k-rounded-md k-button-flat k-button-flat-primary"
+                      >
                         Favorite
-                      </button>
+                      </Button>
                     </CardActions>
                   </div>
                 </Card>

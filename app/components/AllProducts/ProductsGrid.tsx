@@ -9,6 +9,7 @@ import {
   GridToolbar,
   GridDataStateChangeEvent,
 } from "@progress/kendo-react-grid";
+import Link from "next/link";
 import dynamic from "next/dynamic";
 
 const MyGrid: any = dynamic(
@@ -51,9 +52,15 @@ export const AllProducts = () => {
   };
 
   const [dataResult, setDataResult] = React.useState<DataResult>();
-
+  const [isAdmin, setIsAdmin] = React.useState(false);
   React.useEffect(() => {
     fetchData();
+    if (typeof window !== "undefined") {
+      const user = JSON.parse(localStorage.getItem("users") as any) || "";
+      if (user === "admin") {
+        setIsAdmin(true);
+      }
+    }
   }, []);
 
   // modify the data in the store, db etc
@@ -83,32 +90,35 @@ export const AllProducts = () => {
 
   const cancel = (dataItem: Product) => {
     const originalItem = initialData.find((p) => p.id === dataItem.id);
-    const newData = data.map((item) =>
-      item.id === originalItem.id ? originalItem : item
-    );
+    const newData: Product[] | undefined =
+      originalItem &&
+      data.map((item) => (item.id === originalItem.id ? originalItem : item));
 
-    setDataResult(process(newData, dataState));
+    newData && setDataResult(process(newData, dataState));
   };
 
   const enterEdit = (dataItem: Product) => {
-    setDataResult(
-      process(
-        dataResult.data.map((item) =>
-          item.id === dataItem.id ? { ...item, inEdit: true } : item
-        ),
-        dataState
-      )
-    );
+    dataResult &&
+      setDataResult(
+        process(
+          dataResult.data.map((item) =>
+            item.id === dataItem.id ? { ...item, inEdit: true } : item
+          ),
+          dataState
+        )
+      );
   };
 
   const itemChange = (event: GridItemChangeEvent) => {
-    const newData = dataResult.data.map((item) =>
-      item.id === event.dataItem.id
-        ? { ...item, [event.field || ""]: event.value }
-        : item
-    );
+    const newData: any[] | undefined =
+      dataResult &&
+      dataResult.data.map((item) =>
+        item.id === event.dataItem.id
+          ? { ...item, [event.field || ""]: event.value }
+          : item
+      );
 
-    setDataResult(process(newData, dataState));
+    newData && setDataResult(process(newData, dataState));
   };
 
   const addNew = () => {
@@ -184,9 +194,14 @@ export const AllProducts = () => {
           onDataStateChange={dataStateChange}
         >
           <GridToolbar>
-            <Button title="Add new" themeColor="primary" onClick={addNew}>
-              Add new
+            <Button themeColor="primary">
+              <Link href="./home">Back to Home</Link>
             </Button>
+            {isAdmin ?? (
+              <Button title="Add new" themeColor="primary" onClick={addNew}>
+                Add new
+              </Button>
+            )}
             <Button
               title="Export Excel"
               themeColor="primary"
@@ -213,7 +228,9 @@ export const AllProducts = () => {
           <Column field="rating" title="Rating" editor="numeric" />
           <Column field="sale" title="Sale" editor="numeric" />
           <Column field="price" title="Price" editor="numeric" />
-          <Column cell={CommandCell} width="200px" filterable={false} />
+          {isAdmin ?? (
+            <Column cell={CommandCell} width="200px" filterable={false} />
+          )}
         </MyGrid>
       </div>
     </ExcelExport>

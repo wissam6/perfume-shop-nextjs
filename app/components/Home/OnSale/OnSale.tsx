@@ -7,6 +7,21 @@ import { db } from "../../../firebase";
 import { collection, getDocs } from "firebase/firestore";
 import styles from "./onsale.module.css";
 
+interface itemInterface {
+  id?: number;
+  brand?: string;
+  country?: string;
+  image: string;
+  name: string;
+  price: number;
+  rating?: number;
+  sale: number;
+  sex?: string;
+  size?: number;
+  stock?: number;
+  type?: string;
+}
+
 export const OnSale = () => {
   const [data, setData] = React.useState([]);
   const fetchData = async () => {
@@ -49,8 +64,8 @@ export const OnSale = () => {
             automaticViewChange={true}
             automaticViewChangeInterval={2000}
           >
-            {data.map((item, index) => {
-              let newPrice = item.price * (item.sale / 100);
+            {data.map((item: itemInterface, index) => {
+              let newPrice: number = item.price * (item.sale / 100);
               newPrice = item.price - newPrice;
               return (
                 <div key={index}>

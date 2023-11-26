@@ -1,21 +1,34 @@
 "use client";
-import { useRouter } from "next/navigation";
+
 import * as React from "react";
 import {
   Form,
   Field,
   FormElement,
+  FieldRenderProps,
   FormRenderProps,
+  FieldWrapper,
 } from "@progress/kendo-react-form";
 import { Input } from "@progress/kendo-react-inputs";
-import { db } from "../../firebase";
-import { collection, getDocs } from "firebase/firestore";
-const bcrypt = require("bcryptjs");
+import { Error, Hint } from "@progress/kendo-react-labels";
+import { DialogPopup } from "@/app/components/DialogPopup/DialogPopup";
+import Link from "next/link";
 
-export const SignIn = () => {
-  const [loggedUser, setLoggedUser] = React.useState();
+const emailRegex: RegExp = new RegExp(/\S+@\S+\.\S+/);
 
-  const router = useRouter();
+export const SignIn = (props: any) => {
+  const [visible, setVisible] = React.useState<boolean>(false);
+
+  const EmailInput = (fieldRenderProps: FieldRenderProps) => {
+    const { validationMessage, visited, ...others } = fieldRenderProps;
+    return (
+      <div className="k-form-field-wrap">
+        <Input {...others} labelClassName={"k-form-label"} />
+        {visited && validationMessage && <Error>{validationMessage}</Error>}
+      </div>
+    );
+  };
+
   interface submitProps {
     email: string;
     password: string;
@@ -25,40 +38,17 @@ export const SignIn = () => {
   };
 
   const submit = async (email: string, password: string) => {
-    let emailExists = false;
-    let hashPassword;
-    let userName: any;
-
-    const querySnapshot = await getDocs(collection(db, "users"));
-
-    querySnapshot.forEach((doc) => {
-      if (doc.data().email === email) {
-        emailExists = true;
-        hashPassword = doc.data().password;
-        userName = doc.data().userName;
-      }
-    });
-
-    if (!emailExists) {
-      window.alert("incorrect email");
-    } else {
-      bcrypt.compare(password, hashPassword, function (err: any, res: any) {
-        if (err) {
-          console.log(err);
-        }
-        if (res) {
-          setLoggedUser(userName);
-          router.push("/");
-        } else {
-          window.alert("incorrect password");
-        }
-      });
-    }
+    props.formAction(email, password);
   };
 
   React.useEffect(() => {
-    localStorage.setItem("users", JSON.stringify(loggedUser));
-  }, [loggedUser]);
+    if (typeof window !== "undefined") {
+      const userExists = localStorage.getItem("users");
+      if (userExists) {
+        setVisible(true);
+      }
+    }
+  }, []);
 
   return (
     <React.Fragment>
@@ -80,9 +70,11 @@ export const SignIn = () => {
                 <div className="mb-3">
                   <Field
                     name={"email"}
-                    component={Input}
+                    component={EmailInput}
                     label={"Email"}
                     required
+                    /* server side validation is used instead */
+                    //validator={emailValidator}
                   />
                 </div>
                 <div className="mb-3">
@@ -108,7 +100,14 @@ export const SignIn = () => {
             </FormElement>
           )}
         />
+        <Hint>
+          Do not have an account?{" "}
+          <Link style={{ marginLeft: "5px", color: "red" }} href="./signup">
+            Sign Up
+          </Link>
+        </Hint>
       </div>
+      <DialogPopup isVisible={visible} message="You are already logged in" />
     </React.Fragment>
   );
 };

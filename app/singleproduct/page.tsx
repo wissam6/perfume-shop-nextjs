@@ -1,8 +1,8 @@
 "use client";
 
-import { SingleProduct } from "./SingleProduct";
+import { SingleProduct } from "./single-product";
 
-const SingleProductPage = (props) => {
+const SingleProductPage = (props: any) => {
   return <SingleProduct ID={props.ID} />;
 };
 

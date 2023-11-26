@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import {
   Card,
@@ -5,59 +6,33 @@ import {
   CardTitle,
   CardBody,
   CardActions,
-  CardImage,
   CardSubtitle,
-  Avatar,
   Timeline,
   sortEventList,
 } from "@progress/kendo-react-layout";
 import Image from "next/image";
-import { db } from "../firebase";
-import { collection, getDocs } from "firebase/firestore";
 import { Button } from "@progress/kendo-react-buttons";
 import { events } from "./events";
-import { DropDownList } from "@progress/kendo-react-dropdowns";
+import {
+  DropDownList,
+  DropDownListChangeEvent,
+} from "@progress/kendo-react-dropdowns";
+import { db } from "../firebase";
+import { collection, getDocs } from "firebase/firestore";
 
-export const SingleProduct = (props) => {
-  const [item, setItem]: any = React.useState();
-  const [sizes, setSizes]: any = React.useState();
-  const [price, setPrice] = React.useState();
-  const [rating, setRating] = React.useState();
-  const [stock, setStock] = React.useState();
-  const fetchData = async () => {
-    const sizesValues: string[] = [];
-    const querySnapshot = await getDocs(collection(db, "perfumes"));
-    querySnapshot.forEach((doc) => {
-      if (doc.id.toLowerCase() === props.ID) {
-        setItem(doc.data());
-        setPrice(doc.data().price);
-        setRating(doc.data().rating);
-        setStock(doc.data().stock);
-        querySnapshot.forEach((doc2) => {
-          if (
-            doc2.data().name === doc.data().name &&
-            doc2.data().brand === doc.data().brand
-          ) {
-            sizesValues.push(doc2.data().size);
-          }
-        });
-        setSizes(sizesValues);
-      }
-    });
-  };
-
+export const SingleProductCard = (props: any) => {
+  const data = props.data;
+  const [price, setPrice] = React.useState(data.price);
+  const [rating, setRating] = React.useState(data.rating);
+  const [stock, setStock] = React.useState(data.stock);
   const sortedEvents = sortEventList(events);
-  React.useEffect(() => {
-    fetchData();
-  }, []);
-
-  const handleChange = async (e) => {
+  const handleChange = async (e: DropDownListChangeEvent) => {
     const selectedSize = e.value;
     const querySnapshot = await getDocs(collection(db, "perfumes"));
     querySnapshot.forEach((doc) => {
       if (
-        doc.data().name === item.name &&
-        doc.data().brand === item.brand &&
+        doc.data().name === data.item.name &&
+        doc.data().brand === data.item.brand &&
         doc.data().size === selectedSize
       ) {
         setPrice(doc.data().price);
@@ -66,7 +41,6 @@ export const SingleProduct = (props) => {
       }
     });
   };
-
   return (
     <>
       <div
@@ -77,9 +51,9 @@ export const SingleProduct = (props) => {
           margin: "0 auto",
         }}
       >
-        {item && (
+        {data.item && (
           <>
-            <Image src={item.image} alt="img" height={500} width={500} />
+            <Image src={data.item.image} alt="img" height={500} width={500} />
             <Card
               orientation="horizontal"
               style={{
@@ -89,8 +63,8 @@ export const SingleProduct = (props) => {
             >
               <div className="k-vbox">
                 <CardHeader>
-                  <CardTitle>{item.name}</CardTitle>
-                  <CardSubtitle>{item.brand}</CardSubtitle>
+                  <CardTitle>{data.item.name}</CardTitle>
+                  <CardSubtitle>{data.item.brand}</CardSubtitle>
                 </CardHeader>
                 <CardBody>
                   <ul
@@ -101,17 +75,17 @@ export const SingleProduct = (props) => {
                   >
                     <li>price: {price}</li>
                     <li>rating: {rating}</li>
-                    <li>sex: {item.sex}</li>
+                    <li>sex: {data.item.sex}</li>
                     <li>
                       size:{" "}
-                      {sizes.length > 1 ? (
+                      {data.sizes.length > 1 ? (
                         <DropDownList
-                          data={sizes}
-                          defaultValue={item.size}
+                          data={data.sizes}
+                          defaultValue={data.item.size}
                           onChange={handleChange}
                         />
                       ) : (
-                        item.size
+                        data.item.size
                       )}
                     </li>
                     <li>remaining: {stock}</li>
@@ -138,13 +112,13 @@ export const SingleProduct = (props) => {
       </div>
       <style>
         {`
-        .k-timeline-horizontal .k-timeline-events-list .k-timeline-scrollable-wrap {
-          height: 200px;
-        }
-        .k-timeline-horizontal .k-timeline-track-wrap .k-timeline-flag{
-          display: none;
-        }
-        `}
+          .k-timeline-horizontal .k-timeline-events-list .k-timeline-scrollable-wrap {
+            height: 200px;
+          }
+          .k-timeline-horizontal .k-timeline-track-wrap .k-timeline-flag{
+            display: none;
+          }
+          `}
       </style>
     </>
   );
