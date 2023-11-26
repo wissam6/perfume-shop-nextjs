@@ -1,7 +1,7 @@
 import "./globals.css";
 import { Roboto } from "next/font/google";
 const roboto = Roboto({ subsets: ["latin"], weight: ["400"] });
-import "@progress/kendo-theme-default/dist/all.css";
+//import "@progress/kendo-theme-default/dist/all.css";
 
 export const metadata = {
   title: "Golden Perfume",
@@ -15,6 +15,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link
+          rel="stylesheet"
+          data-kendo="true"
+          href={`https://cdn.kendostatic.com/themes/7.0.1/default/default-main.css`}
+        />
+      </head>
       <body className={roboto.className}>{children}</body>
     </html>
   );

@@ -17,9 +17,9 @@ import {
   plusCircleIcon,
 } from "@progress/kendo-svg-icons";
 import { useRouter } from "next/navigation";
-import { DropDownList } from "@progress/kendo-react-dropdowns";
 import { Badge, BadgeContainer } from "@progress/kendo-react-indicators";
 import { cartIcon } from "@progress/kendo-svg-icons";
+import { ThemeSwitcher } from "../theme-switcher/ThemeSwitcher";
 import styles from "./header.module.css";
 
 export const Header = (props: any) => {
@@ -146,7 +146,7 @@ export const Header = (props: any) => {
             </div>
           </AppBarSection>
           <AppBarSection>
-            <DropDownList defaultValue={"theme chooser"} />
+            <ThemeSwitcher />
           </AppBarSection>
           {!userInfo && (
             <>
