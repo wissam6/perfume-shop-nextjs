@@ -14,7 +14,6 @@ interface DialogPopupInterface extends DialogProps {
 }
 
 export const DialogPopup = (props: DialogPopupInterface) => {
-  console.log(props.isVisible);
   const router = useRouter();
   const [visible, setVisible] = React.useState<boolean>(props.isVisible);
 

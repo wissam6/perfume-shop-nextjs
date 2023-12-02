@@ -1,9 +1,8 @@
-import { SignUp } from "./SignUp";
-
+import { GridLoader } from "./grid-loader";
 export default function Page() {
   return (
     <>
-      <SignUp />
+      <GridLoader />
     </>
   );
 }

@@ -1,15 +1,25 @@
 import * as React from "react";
-import { ProductsCategory } from "../product-category";
-import { ProductLoader } from "../products-loader";
+import { ProductsCategoryClient } from "../ProductsCategory";
+import { db } from "../../firebase";
+import { collection, getDocs } from "firebase/firestore";
 
-//import { useSearchParams } from "next/navigation";
-
-export default function Page({ params }: { params: { id: string } }) {
+export default async function Page({ params }: { params: { id: string } }) {
   const product = params.id.toLowerCase();
 
-  return (
-    <React.Suspense fallback={<ProductLoader />}>
-      <ProductsCategory product={product} />{" "}
-    </React.Suspense>
-  );
+  const getData = async () => {
+    //to be replaced by fetching only the needed category
+    let products: any = [];
+    const querySnapshot = await getDocs(collection(db, "perfumes"));
+    querySnapshot.forEach((doc) => {
+      let docData = doc.data();
+      docData.id = doc.id;
+      if (docData.brand.toLowerCase() === product) {
+        products = [...products, docData];
+      }
+    });
+    return products;
+  };
+  const data = await getData();
+
+  return <ProductsCategoryClient product={product} data={data} />;
 }

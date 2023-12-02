@@ -172,13 +172,12 @@ export const Categories = () => {
         }
         .float-container {
           padding: 20px;
-      }
-
-      .float-child {
+        }
+        .float-child {
           width: 50%;
           float: left;
           padding: 20px;
-      }  
+        }  
         `}
       </style>
     </React.Fragment>

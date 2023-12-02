@@ -15,42 +15,40 @@ import {
   heartIcon,
   loginIcon,
   plusCircleIcon,
+  userIcon,
 } from "@progress/kendo-svg-icons";
 import { useRouter } from "next/navigation";
-import { DropDownList } from "@progress/kendo-react-dropdowns";
 import { Badge, BadgeContainer } from "@progress/kendo-react-indicators";
 import { cartIcon } from "@progress/kendo-svg-icons";
+import { ThemeSwitcher } from "../theme-switcher/ThemeSwitcher";
 import styles from "./header.module.css";
+import Image from "next/image";
 
 export const Header = (props: any) => {
-  const userInfo = JSON.parse(props.user.value);
+  const userInfo = props.user && JSON.parse(props.user.value);
   const router = useRouter();
-  const [cartNumber, setCartNumber] = React.useState<number>(
-    localStorage.getItem("items") !== null
-      ? JSON.parse(localStorage.getItem("items") as any).length
-      : 0
-  );
-  const [favouritesNumber, setFavouritesNumber] = React.useState(
-    localStorage.getItem("fav") !== null
-      ? JSON.parse(localStorage.getItem("fav") as any).length
-      : 0
-  );
+  const [cartNumber, setCartNumber] = React.useState<number>();
+  const [favouritesNumber, setFavouritesNumber] = React.useState();
   const [show, setShow] = React.useState<boolean>(false);
-  const [isLoggedIn, setIsLoggedIn] = React.useState<boolean>(false);
-  const [user, setUser] = React.useState<string>();
   const anchor = React.useRef(null);
   const handleClick = () => {
     setShow(!show);
   };
-  React.useEffect(() => {
-    const userExists = localStorage.getItem("users");
-    if (userExists) {
-      setIsLoggedIn(true);
-      setUser(userExists);
-    }
-  }, []);
 
   React.useEffect(() => {
+    if (typeof window !== undefined) {
+      const cartNumber =
+        localStorage.getItem("items") !== null
+          ? JSON.parse(localStorage.getItem("items") as any).length
+          : 0;
+      setCartNumber(cartNumber);
+      const favouritesNumber =
+        localStorage.getItem("fav") !== null
+          ? JSON.parse(localStorage.getItem("fav") as any).length
+          : 0;
+      setFavouritesNumber(favouritesNumber);
+    }
+
     const handleStorage = () => {
       const items = localStorage.getItem("items") || "";
       const parsedItems = JSON.parse(items);
@@ -80,7 +78,7 @@ export const Header = (props: any) => {
 
   const logout = () => {
     localStorage.removeItem("users");
-    router.push("./home");
+    router.push("/home");
   };
   return (
     <React.Fragment>
@@ -88,33 +86,33 @@ export const Header = (props: any) => {
         <AppBar positionMode="sticky">
           <AppBarSection className={styles.title}>
             <Link href="/home">
-              <h1 className={styles.title}>Golden Perfume</h1>
+              <h1 className={styles.title}>
+                <span style={{ color: "#ffd700" }}>Golden</span> Perfume
+              </h1>
             </Link>
           </AppBarSection>
-
+          <Image src="perfume.svg" alt="My Happy SVG" width={50} height={50} />
           <AppBarSpacer
             style={{
               width: 32,
             }}
           />
-
           <AppBarSection className="appbar-items">
             <ul className={styles.ulStyles}>
               <li className={styles.liStyles}>
-                <Link href="./aboutus">About Us</Link>
+                <Link href="/aboutus">About Us</Link>
               </li>
               <li className={styles.liStyles}>
-                <Link href="./home#our-top-brands">Our Top Brands</Link>
+                <Link href="/home#our-top-brands">Our Top Brands</Link>
               </li>
               <li className={styles.liStyles}>
-                <Link href="./allproducts">All Products</Link>
+                <Link href="/allproducts">All Products</Link>
               </li>
               <li className={styles.liStyles}>
-                <Link href="./home#contact-us">Contact Us</Link>
+                <Link href="/home#contact-us">Contact Us</Link>
               </li>
             </ul>
           </AppBarSection>
-
           <AppBarSpacer />
           <AppBarSection>
             <div
@@ -123,7 +121,7 @@ export const Header = (props: any) => {
                 gap: 10,
               }}
             >
-              <Link href={"./cart"}>
+              <Link href={"/cart"} as="/cart">
                 <BadgeContainer>
                   <SvgIcon icon={cartIcon} size="large" />
                   <Badge
@@ -135,7 +133,7 @@ export const Header = (props: any) => {
                   </Badge>
                 </BadgeContainer>
               </Link>
-              <Link href={"./favourites"}>
+              <Link href={"/favourites"} as="/favourites">
                 <BadgeContainer>
                   <SvgIcon icon={heartIcon} size="large" />
                   <Badge
@@ -150,17 +148,17 @@ export const Header = (props: any) => {
             </div>
           </AppBarSection>
           <AppBarSection>
-            <DropDownList defaultValue={"theme chooser"} />
+            <ThemeSwitcher />
           </AppBarSection>
           {!userInfo && (
             <>
               <AppBarSection>
-                <Link href="./authentication/signin">
+                <Link href="/authentication/signin">
                   Sign In <SvgIcon icon={loginIcon} />
                 </Link>
               </AppBarSection>
               <AppBarSection>
-                <Link href="./authentication/signup">
+                <Link href="/authentication/signup">
                   Sign Up <SvgIcon icon={plusCircleIcon} />
                 </Link>
               </AppBarSection>
@@ -170,7 +168,9 @@ export const Header = (props: any) => {
             <>
               <AppBarSection>Welcome, {userInfo.username}</AppBarSection>
               <button ref={anchor} onClick={handleClick}>
-                <Avatar rounded="full" type="text" style={{ marginRight: 5 }} />
+                <Avatar rounded="full" type="text" style={{ marginRight: 5 }}>
+                  <SvgIcon icon={userIcon} />
+                </Avatar>
               </button>
               <Popup
                 anchor={anchor.current}
