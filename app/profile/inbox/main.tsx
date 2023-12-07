@@ -12,8 +12,8 @@ export const Inbox = () => {
             AB
           </Avatar>
           <div>
-            Hi Tom, Since Monday I&apos;ll be out of office, I&apos;m rescheduling the
-            meeting for Tuesday.
+            Hi Thomas, Since Monday I&apos;ll be out of office, I&apos;m
+            rescheduling the meeting for Tuesday.
           </div>
         </div>
         <div className={"list-item separator"} />
